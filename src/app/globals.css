@@ -36,6 +36,16 @@
   }
 }
 
+@keyframes pulse-orange {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 107, 0, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+}
+
+.animate-pulse-orange {
+  animation: pulse-orange 2s infinite;
+}
+
 .sticky-cta-shadow {
   box-shadow: 0 -4px 20px rgba(255, 107, 0, 0.2);
 }
