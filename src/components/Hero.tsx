@@ -15,7 +15,7 @@ export default function Hero() {
           alt="Tractări Auto Sibiu Platformă"
           fill
           className="object-cover opacity-40 grayscale"
-          priority
+          priority={true}
           data-ai-hint="tow truck"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />

@@ -1,12 +1,20 @@
 import type {Metadata} from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Tractări Auto Sibiu | Servicii 24/7 | 0700 000 000',
   description: 'Tractări auto Sibiu rapid și profesional. Disponibili 24/7, timp răspuns 30 minute. Acoperim tot județul Sibiu. Sună acum!',
   keywords: ['tractări auto Sibiu', 'tractari masini sibiu', 'depanare auto sibiu', 'transport auto sibiu', 'asistență rutieră sibiu'],
+  metadataBase: new URL('https://tractarimasinisibiu.ro'),
   alternates: {
-    canonical: 'https://tractarimasinisibiu.ro',
+    canonical: '/',
   },
   robots: {
     index: true,
@@ -19,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'Tractări Mașini Sibiu',
     images: [
       {
-        url: 'https://tractarimasinisibiu.ro/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Tractări Auto Sibiu Platformă',
@@ -51,11 +59,11 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="ro" className="scroll-smooth">
+    <html lang="ro" className={`scroll-smooth ${inter.variable}`}>
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#FF6B00" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

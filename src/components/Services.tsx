@@ -65,6 +65,7 @@ export default function Services() {
                       alt={service.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                      loading="lazy"
                       data-ai-hint={serviceImg?.imageHint || 'towing'}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
