@@ -14,6 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/intrebari-frecvente',
     '/contact',
     '/blog',
+    '/politica-de-confidentialitate',
+    '/termeni-si-conditii',
+    '/politica-cookies',
+    '/anpc',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,

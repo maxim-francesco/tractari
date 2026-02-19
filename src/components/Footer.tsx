@@ -1,73 +1,73 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
+import { Phone, MessageCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-secondary/10 pt-20 pb-28 md:pb-10 border-t border-border">
+    <footer className="bg-background pt-20 pb-10 border-t border-border">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6" aria-label="Tractări Sibiu - Pagina principală">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">T</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16">
+          {/* Column 1 - Brand */}
+          <div>
+            <Link href="/" className="flex items-center gap-2 mb-6 group">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
+                <span className="text-white font-bold text-xl uppercase">T</span>
               </div>
-              <span className="text-white font-bold tracking-tight text-xl uppercase">Tractări Sibiu</span>
+              <span className="text-primary font-bold tracking-tight text-xl uppercase">TRACTĂRI SIBIU</span>
             </Link>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Partenerul tău de încredere pentru asistență rutieră și transport auto în Sibiu. Intervenim rapid în tot județul, 24/7.
+            <p className="text-muted-foreground leading-relaxed mb-8 font-medium">
+              Servicii profesionale de tractare auto în județul Sibiu, disponibili 24/7. Intervenție rapidă și sigură oriunde te afli.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white" aria-label="Urmărește-ne pe Facebook">
-                <Facebook className="w-5 h-5" aria-hidden="true" />
+            <div className="space-y-4">
+              <a href="tel:+40742916370" className="flex items-center gap-3 text-white hover:text-primary transition-colors font-black text-lg tracking-tight">
+                <Phone className="w-5 h-5 text-primary" /> +40 742 916 370
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white" aria-label="Urmărește-ne pe Instagram">
-                <Instagram className="w-5 h-5" aria-hidden="true" />
-              </a>
+              <Button size="sm" className="bg-[#25D366] hover:bg-[#25D366]/90 text-white font-black rounded-xl h-10 px-6" asChild>
+                <a href="https://wa.me/40742916370" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-4 h-4 mr-2" /> WhatsApp
+                </a>
+              </Button>
             </div>
           </div>
 
-          <nav aria-label="Link-uri servicii footer">
-            <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Servicii</h4>
-            <ul className="space-y-4 text-muted-foreground">
-              <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări Autoturisme</Link></li>
-              <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări SUV & Dubite</Link></li>
-              <li><Link href="/depanare-auto-sibiu" className="hover:text-primary transition-colors">Pornire Curent</Link></li>
-              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Rapid</Link></li>
+          {/* Column 2 - Navigation */}
+          <nav aria-label="Navigare footer" className="md:pl-12">
+            <h4 className="font-black text-white uppercase tracking-widest text-sm mb-8">Navigare Rapidă</h4>
+            <ul className="space-y-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">
+              <li><Link href="/" className="hover:text-primary transition-colors">Acasă</Link></li>
+              <li><Link href="/#servicii" className="hover:text-primary transition-colors">Servicii</Link></li>
+              <li><Link href="/#coverage" className="hover:text-primary transition-colors">Zone Acoperite</Link></li>
+              <li><Link href="/intrebari-frecvente" className="hover:text-primary transition-colors">Întrebări Frecvente</Link></li>
+              <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
             </ul>
           </nav>
 
+          {/* Column 3 - Legal */}
           <div>
-            <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Contact</h4>
-            <ul className="space-y-4 text-muted-foreground">
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
-                <a href="tel:+40742916370" className="hover:text-white transition-colors" aria-label="Sună la +40 742 916 370">+40 742 916 370</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
-                <a href="mailto:contact@tractarimasinisibiu.ro" className="hover:text-white transition-colors">contact@tractarimasinisibiu.ro</a>
-              </li>
-              <li className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
-                <span>Sibiu, România (Acoperire Județ)</span>
-              </li>
+            <h4 className="font-black text-white uppercase tracking-widest text-sm mb-8">Informații Legale</h4>
+            <ul className="space-y-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">
+              <li><Link href="/politica-de-confidentialitate" className="hover:text-primary transition-colors">Politică de Confidențialitate</Link></li>
+              <li><Link href="/termeni-si-conditii" className="hover:text-primary transition-colors">Termeni și Condiții</Link></li>
+              <li><Link href="/politica-cookies" className="hover:text-primary transition-colors">Politică Cookies</Link></li>
+              <li><Link href="/anpc" className="hover:text-primary transition-colors">ANPC</Link></li>
             </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Program</h4>
-            <div className="bg-primary/10 border border-primary/20 p-6 rounded-2xl text-center">
-              <div className="text-primary font-black text-2xl mb-1 tracking-tighter">NON-STOP</div>
-              <p className="text-white/80 text-sm uppercase font-bold tracking-widest">Suntem disponibili 24/7</p>
+            <div className="mt-8 pt-6 border-t border-border/50 text-[10px] text-muted-foreground space-y-1 font-bold uppercase tracking-widest">
+              <p>CUI: 53773945</p>
+              <p>Reg. Com.: F02/600/570007</p>
+              <p>PISALTU MIHAI-ILIE P.F.A.</p>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Tractări Mașini Sibiu. Toate drepturile rezervate.</p>
-          <div className="flex gap-8">
-            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            <Link href="#" className="hover:text-white transition-colors">Confidențialitate</Link>
+        <div className="pt-10 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground text-center md:text-left">
+            © {currentYear} PISALTU MIHAI-ILIE P.F.A. Toate drepturile rezervate.
+          </p>
+          <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
+            Construit și proiectat de Francesco Maxim | +40758990675
           </div>
         </div>
       </div>
