@@ -6,53 +6,13 @@ import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Tractări Mașini Sibiu",
-    "image": "https://tractarimasinisibiu.ro/logo.png",
-    "telephone": "0700 000 000",
-    "url": "https://tractarimasinisibiu.ro",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Sibiu",
-      "addressRegion": "SB",
-      "addressCountry": "RO"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 45.7983,
-      "longitude": 24.1256
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "00:00",
-      "closes": "23:59"
-    },
-    "priceRange": "$$"
-  };
-
   return (
     <main className="min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <Navigation />
       <Hero />
       <TrustSignals />
       <Services />
       
-      {/* About Section Short */}
       <section id="despre" className="py-24 bg-secondary/5">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-16">
