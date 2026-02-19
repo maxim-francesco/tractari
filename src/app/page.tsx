@@ -6,7 +6,7 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
-import { MapPin, Shield, HelpCircle, ChevronRight } from 'lucide-react';
+import { MapPin, Shield, HelpCircle, Truck } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const locations = [
@@ -175,15 +175,11 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="flex-1 order-1 md:order-2 relative w-full max-w-xl aspect-square">
-              <div className="absolute inset-0 bg-primary/20 rounded-[4rem] rotate-6 scale-95" />
-              <div className="absolute inset-0 bg-secondary/20 rounded-[4rem] -rotate-3" />
-              <div className="relative h-full w-full rounded-[4rem] overflow-hidden shadow-2xl border-4 border-white/5">
-                <img 
-                  src="https://picsum.photos/seed/experience/800/800" 
-                  alt="Echipa Tractări Sibiu Intervenție" 
-                  className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
-                />
+            <div className="flex-1 order-1 md:order-2 relative w-full max-w-xl aspect-square bg-secondary/30 rounded-[4rem] border border-primary/20 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+              <div className="relative text-center p-12">
+                <Truck className="w-32 h-32 text-primary mx-auto mb-6 opacity-50" />
+                <p className="text-3xl font-black uppercase tracking-tighter italic">Experiență <br/><span className="text-primary">Garantată</span></p>
               </div>
             </div>
           </div>

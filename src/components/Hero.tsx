@@ -1,25 +1,14 @@
-import Image from 'next/image';
 import { Phone, Clock, MapPin, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Hero() {
-  const heroImage = PlaceHolderImages.find(img => img.id === 'hero-tow-truck');
-
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={heroImage?.imageUrl || 'https://picsum.photos/seed/tow1/1200/800'}
-          alt="Tractări Auto Sibiu Platformă"
-          fill
-          className="object-cover opacity-40 grayscale"
-          priority={true}
-          data-ai-hint="tow truck"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-      </div>
+      {/* Background Gradient */}
+      <div 
+        className="absolute inset-0 z-0" 
+        style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 50%, #0A0A0A 100%)' }} 
+      />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10 w-full py-20">
         <div className="max-w-4xl">

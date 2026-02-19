@@ -25,14 +25,6 @@ export const metadata: Metadata = {
     description: 'Servicii rapide de tractare și asistență rutieră în tot județul Sibiu. Intervenție în 30 de minute.',
     url: 'https://tractarimasinisibiu.ro',
     siteName: 'Tractări Mașini Sibiu',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Tractări Auto Sibiu Platformă',
-      },
-    ],
     locale: 'ro_RO',
     type: 'website',
   },
