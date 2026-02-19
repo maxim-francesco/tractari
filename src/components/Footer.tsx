@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6">
+            <Link href="/" className="flex items-center gap-2 mb-6" aria-label="Tractări Sibiu - Pagina principală">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">T</span>
               </div>
@@ -17,16 +17,16 @@ export default function Footer() {
               Partenerul tău de încredere pentru asistență rutieră și transport auto în Sibiu. Intervenim rapid în tot județul, 24/7.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white">
-                <Facebook className="w-5 h-5" />
+              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white" aria-label="Urmărește-ne pe Facebook">
+                <Facebook className="w-5 h-5" aria-hidden="true" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white">
-                <Instagram className="w-5 h-5" />
+              <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:border-primary transition-all text-white" aria-label="Urmărește-ne pe Instagram">
+                <Instagram className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
           </div>
 
-          <div>
+          <nav aria-label="Link-uri servicii footer">
             <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Servicii</h4>
             <ul className="space-y-4 text-muted-foreground">
               <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări Autoturisme</Link></li>
@@ -34,21 +34,21 @@ export default function Footer() {
               <li><Link href="/depanare-auto-sibiu" className="hover:text-primary transition-colors">Pornire Curent</Link></li>
               <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Rapid</Link></li>
             </ul>
-          </div>
+          </nav>
 
           <div>
             <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Contact</h4>
             <ul className="space-y-4 text-muted-foreground">
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:+40742916370" className="hover:text-white transition-colors">+40 742 916 370</a>
+                <Phone className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
+                <a href="tel:+40742916370" className="hover:text-white transition-colors" aria-label="Sună la +40 742 916 370">+40 742 916 370</a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
+                <Mail className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
                 <a href="mailto:contact@tractarimasinisibiu.ro" className="hover:text-white transition-colors">contact@tractarimasinisibiu.ro</a>
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0" />
+                <MapPin className="w-5 h-5 text-primary shrink-0" aria-hidden="true" />
                 <span>Sibiu, România (Acoperire Județ)</span>
               </li>
             </ul>
@@ -56,9 +56,9 @@ export default function Footer() {
 
           <div>
             <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Program</h4>
-            <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl text-center">
+            <div className="bg-primary/10 border border-primary/20 p-6 rounded-2xl text-center">
               <div className="text-primary font-black text-2xl mb-1 tracking-tighter">NON-STOP</div>
-              <p className="text-muted-foreground text-sm uppercase font-bold tracking-widest">Suntem disponibili 24/7</p>
+              <p className="text-white/80 text-sm uppercase font-bold tracking-widest">Suntem disponibili 24/7</p>
             </div>
           </div>
         </div>

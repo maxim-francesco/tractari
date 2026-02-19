@@ -64,132 +64,134 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navigation />
-      <Hero />
-      <TrustSignals />
-      <Services />
-      
-      <section id="coverage" className="py-32 bg-secondary/5">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter">
-              Acoperim Sibiu și <span className="text-primary">Împrejurimile</span>
-            </h2>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto font-medium">
-              Oferim servicii de tractare auto și asistență rutieră în tot județul Sibiu, inclusiv pe Autostrada A1 și în localități precum Șelimbăr. Indiferent unde te afli, ajungem la tine rapid și sigur.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {locations.map((loc) => (
-              <div key={loc} className="flex items-center gap-3 p-4 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all group">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
-                  <MapPin className="w-5 h-5 text-primary group-hover:text-white" />
-                </div>
-                <span className="font-bold uppercase tracking-tight text-sm md:text-base">{loc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="py-32 bg-background border-t border-border">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 text-primary font-black mb-4 uppercase tracking-widest text-sm">
-              <HelpCircle className="w-5 h-5" /> Suport 24/7
-            </div>
-            <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter">
-              Întrebări <span className="text-primary">Frecvente</span>
-            </h2>
-            <p className="text-muted-foreground text-xl font-medium">
-              Răspunsuri la cele mai comune întrebări despre serviciile noastre.
-            </p>
-          </div>
-
-          <Accordion type="single" collapsible className="w-full space-y-4">
-            {faqItems.map((item, idx) => (
-              <AccordionItem key={idx} value={`item-${idx}`} className="border border-border bg-secondary/10 rounded-2xl px-6">
-                <AccordionTrigger className="text-lg font-black uppercase tracking-tight hover:text-primary hover:no-underline py-6">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-lg leading-relaxed pb-6">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
-      <section id="despre" className="py-32 bg-background overflow-hidden border-t border-border">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-20">
-            <div className="flex-1 order-2 md:order-1">
-              <div className="inline-flex items-center gap-2 text-primary font-black mb-6 uppercase tracking-widest text-sm">
-                <Shield className="w-5 h-5" /> Siguranță Garantată
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-8 font-headline uppercase tracking-tighter leading-tight">
-                Lideri Locali în <br />
-                <span className="text-primary">Asistență Rutieră</span>
+      <main role="main">
+        <Hero />
+        <TrustSignals />
+        <Services />
+        
+        <section id="coverage" className="py-32 bg-secondary/5" aria-labelledby="coverage-title">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 id="coverage-title" className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter text-white">
+                Acoperim Sibiu și <span className="text-primary">Împrejurimile</span>
               </h2>
-              <p className="text-muted-foreground text-xl leading-relaxed mb-8 font-medium">
-                Cu o experiență bogată în domeniul asistenței rutiere, echipa noastră din Sibiu este partenerul pe care te poți baza oricând ai o problemă cu vehiculul tău.
+              <p className="text-white/90 text-xl max-w-3xl mx-auto font-medium">
+                Oferim servicii de tractare auto și asistență rutieră în tot județul Sibiu, inclusiv pe Autostrada A1 și în localități precum Șelimbăr. Indiferent unde te afli, ajungem la tine rapid și sigur.
               </p>
-              
-              <div className="space-y-6 mb-12">
-                <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mt-1">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-black uppercase tracking-tight text-lg">Asigurare CMR Inclusă</h4>
-                    <p className="text-muted-foreground">Orice vehicul transportat de noi este asigurat pe toată durata transportului.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mt-1">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-black uppercase tracking-tight text-lg">Echipamente Profesionale</h4>
-                    <p className="text-muted-foreground">Folosim platforme moderne și roboți de pornire de ultimă generație.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
-                  <div className="text-primary font-black text-4xl mb-2 tracking-tighter">100%</div>
-                  <div className="text-sm text-muted-foreground font-bold uppercase tracking-widest">Profesionalism</div>
-                </div>
-                <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
-                  <div className="text-primary font-black text-4xl mb-2 tracking-tighter">24/7</div>
-                  <div className="text-sm text-muted-foreground font-bold uppercase tracking-widest">Disponibilitate</div>
-                </div>
-              </div>
             </div>
             
-            <div className="flex-1 order-1 md:order-2 relative w-full max-w-xl aspect-square bg-secondary/30 rounded-[4rem] border border-primary/20 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-              <div className="relative text-center p-12">
-                <Truck className="w-32 h-32 text-primary mx-auto mb-6 opacity-50" />
-                <p className="text-3xl font-black uppercase tracking-tighter italic">Experiență <br/><span className="text-primary">Garantată</span></p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {locations.map((loc) => (
+                <div key={loc} className="flex items-center gap-3 p-4 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all group">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <MapPin className="w-5 h-5 text-primary group-hover:text-white" aria-hidden="true" />
+                  </div>
+                  <span className="font-bold uppercase tracking-tight text-sm md:text-base text-white">{loc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="py-32 bg-background border-t border-border" aria-labelledby="faq-title">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 text-primary font-black mb-4 uppercase tracking-widest text-sm">
+                <HelpCircle className="w-5 h-5" aria-hidden="true" /> Suport 24/7
+              </div>
+              <h2 id="faq-title" className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter text-white">
+                Întrebări <span className="text-primary">Frecvente</span>
+              </h2>
+              <p className="text-white/90 text-xl font-medium">
+                Răspunsuri la cele mai comune întrebări despre serviciile noastre.
+              </p>
+            </div>
+
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqItems.map((item, idx) => (
+                <AccordionItem key={idx} value={`item-${idx}`} className="border border-border bg-secondary/10 rounded-2xl px-6">
+                  <AccordionTrigger className="text-lg font-black uppercase tracking-tight hover:text-primary hover:no-underline py-6 text-white">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-white/80 text-lg leading-relaxed pb-6">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+
+        <section id="despre" className="py-32 bg-background overflow-hidden border-t border-border" aria-labelledby="about-title">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center gap-20">
+              <div className="flex-1 order-2 md:order-1">
+                <div className="inline-flex items-center gap-2 text-primary font-black mb-6 uppercase tracking-widest text-sm">
+                  <Shield className="w-5 h-5" aria-hidden="true" /> Siguranță Garantată
+                </div>
+                <h2 id="about-title" className="text-4xl md:text-6xl font-black mb-8 font-headline uppercase tracking-tighter leading-tight text-white">
+                  Lideri Locali în <br />
+                  <span className="text-primary">Asistență Rutieră</span>
+                </h2>
+                <p className="text-white/90 text-xl leading-relaxed mb-8 font-medium">
+                  Cu o experiență bogată în domeniul asistenței rutiere, echipa noastră din Sibiu este partenerul pe care te poți baza oricând ai o problemă cu vehiculul tău.
+                </p>
+                
+                <div className="space-y-6 mb-12">
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mt-1" aria-hidden="true">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-black uppercase tracking-tight text-lg text-white">Asigurare CMR Inclusă</h3>
+                      <p className="text-white/80">Orice vehicul transportat de noi este asigurat pe toată durata transportului.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mt-1" aria-hidden="true">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-black uppercase tracking-tight text-lg text-white">Echipamente Profesionale</h3>
+                      <p className="text-white/80">Folosim platforme moderne și roboți de pornire de ultimă generație.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
+                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">100%</div>
+                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Profesionalism</div>
+                  </div>
+                  <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
+                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">24/7</div>
+                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Disponibilitate</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-1 order-1 md:order-2 relative w-full max-w-xl aspect-square bg-secondary/30 rounded-[4rem] border border-primary/20 flex items-center justify-center overflow-hidden" aria-hidden="true">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+                <div className="relative text-center p-12">
+                  <Truck className="w-32 h-32 text-primary mx-auto mb-6 opacity-50" />
+                  <p className="text-3xl font-black uppercase tracking-tighter italic text-white">Experiență <br/><span className="text-primary">Garantată</span></p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Testimonials />
-      <Contact />
+        <Testimonials />
+        <Contact />
+      </main>
       <Footer />
       <StickyCTA />
-    </main>
+    </div>
   );
 }
