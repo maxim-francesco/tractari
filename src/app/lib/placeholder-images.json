@@ -1,0 +1,29 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-tow-truck",
+      "description": "Professional tow truck in operation at night",
+      "imageUrl": "https://picsum.photos/seed/tow1/1200/800",
+      "imageHint": "tow truck"
+    },
+    {
+      "id": "car-transport",
+      "description": "Car being transported on a flatbed trailer",
+      "imageUrl": "https://picsum.photos/seed/tow2/600/400",
+      "imageHint": "car transport"
+    },
+    {
+      "id": "roadside-assistance",
+      "description": "Mechanic providing roadside assistance to a driver",
+      "imageUrl": "https://picsum.photos/seed/tow3/600/400",
+      "imageHint": "roadside assistance"
+    },
+    {
+      "id": "emergency-service",
+      "description": "Tow truck lights flashing during emergency call",
+      "imageUrl": "https://picsum.photos/seed/tow4/600/400",
+      "imageHint": "emergency towing"
+    }
+  ]
+}
