@@ -56,7 +56,15 @@ export default function RootLayout({
     "telephone": "+40742916370",
     "openingHours": "Mo-Su 00:00-24:00",
     "areaServed": ["Sibiu", "Șelimbăr", "Cisnădie", "Avrig", "Tălmaciu", "Ocna Sibiului", "Mediaș", "Agnita", "Dumbrăveni", "Păltiniș", "Rășinari", "Autostrada A1"],
-    "priceRange": "$$"
+    "priceRange": "$$",
+    "hasMap": "https://maps.google.com/?q=Sibiu,Romania",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+40742916370",
+      "contactType": "customer service",
+      "availableLanguage": "Romanian",
+      "hoursAvailable": "Mo-Su 00:00-24:00"
+    }
   };
 
   return (

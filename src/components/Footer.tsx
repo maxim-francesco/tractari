@@ -32,7 +32,7 @@ export default function Footer() {
               <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări Autoturisme</Link></li>
               <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări SUV & Dubite</Link></li>
               <li><Link href="/depanare-auto-sibiu" className="hover:text-primary transition-colors">Pornire Curent</Link></li>
-              <li><Link href="/depanare-auto-sibiu" className="hover:text-primary transition-colors">Depanare Baterie</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Rapid</Link></li>
             </ul>
           </div>
 
@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Tractări Mașini Sibiu. Toate drepturile rezervate.</p>
           <div className="flex gap-8">
-            <Link href="#" className="hover:text-white transition-colors">Cookies</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
             <Link href="#" className="hover:text-white transition-colors">Confidențialitate</Link>
           </div>
         </div>
