@@ -10,10 +10,10 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Servicii', href: '#servicii' },
-    { name: 'Acoperire', href: '#coverage' },
-    { name: 'Testimoniale', href: '#testimoniale' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Servicii', href: '/#servicii' },
+    { name: 'Acoperire', href: '/#coverage' },
+    { name: 'FAQ', href: '/intrebari-frecvente' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
