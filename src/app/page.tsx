@@ -136,11 +136,11 @@ export default function Home() {
                   <Shield className="w-5 h-5" aria-hidden="true" /> Siguranță Garantată
                 </div>
                 <h2 id="about-title" className="text-4xl md:text-6xl font-black mb-8 font-headline uppercase tracking-tighter leading-tight text-white">
-                  Lideri Locali în <br />
+                  Partenerul Tău în <br />
                   <span className="text-primary">Asistență Rutieră</span>
                 </h2>
                 <p className="text-white/90 text-xl leading-relaxed mb-8 font-medium">
-                  Cu o experiență bogată în domeniul asistenței rutiere, echipa noastră din Sibiu este partenerul pe care te poți baza oricând ai o problemă cu vehiculul tău.
+                  Cu dedicare și profesionalism, echipa noastră din Sibiu este ajutorul pe care te poți baza oricând ai o problemă cu vehiculul tău, indiferent de oră sau locație.
                 </p>
                 
                 <div className="space-y-6 mb-12">
@@ -166,12 +166,12 @@ export default function Home() {
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
-                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">100%</div>
-                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Profesionalism</div>
+                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">NON-STOP</div>
+                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Disponibilitate</div>
                   </div>
                   <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
-                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">24/7</div>
-                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Disponibilitate</div>
+                    <div className="text-primary font-black text-4xl mb-2 tracking-tighter">CMR</div>
+                    <div className="text-sm text-white/80 font-bold uppercase tracking-widest">Transport Asigurat</div>
                   </div>
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
                 <div className="relative text-center p-12">
                   <Truck className="w-32 h-32 text-primary mx-auto mb-6 opacity-50" />
-                  <p className="text-3xl font-black uppercase tracking-tighter italic text-white">Experiență <br/><span className="text-primary">Garantată</span></p>
+                  <p className="text-3xl font-black uppercase tracking-tighter italic text-white">Promptitudine <br/><span className="text-primary">Garantată</span></p>
                 </div>
               </div>
             </div>
