@@ -13,6 +13,7 @@ export default function Navigation() {
     { name: 'Servicii', href: '/#servicii' },
     { name: 'Acoperire', href: '/#coverage' },
     { name: 'FAQ', href: '/intrebari-frecvente' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
 

@@ -1,51 +1,32 @@
 import { MetadataRoute } from 'next'
+import { blogPosts } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://tractarimasinisibiu.ro'
   const lastModified = new Date()
   
-  return [
-    {
-      url: baseUrl,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/tractari-auto-sibiu`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/transport-auto-sibiu`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/depanare-auto-sibiu`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/asistenta-rutiera-sibiu`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/intrebari-frecvente`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
+  const routes = [
+    '',
+    '/tractari-auto-sibiu',
+    '/transport-auto-sibiu',
+    '/depanare-auto-sibiu',
+    '/asistenta-rutiera-sibiu',
+    '/intrebari-frecvente',
+    '/contact',
+    '/blog',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: route === '' ? 1 : 0.8,
+  }))
+
+  const blogRoutes = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...routes, ...blogRoutes]
 }
