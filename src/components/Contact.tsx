@@ -25,21 +25,21 @@ export default function Contact() {
               Contactați-ne <span className="text-primary">Acum</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              Suntem disponibili 24 de ore din 24, 7 zile din 7. Alegeți metoda de contact preferată pentru o intervenție promptă.
+              Suntem disponibili 24 de ore din 24, 7 zile din 7. Alegeți metoda de contact preferată pentru o intervenție promptă în tot județul Sibiu.
             </p>
 
             <div className="space-y-8">
-              <a href="tel:0700000000" className="flex items-center gap-6 p-6 rounded-3xl bg-secondary/20 border border-border hover:border-primary transition-all group">
+              <a href="tel:+40742916370" className="flex items-center gap-6 p-6 rounded-3xl bg-secondary/20 border border-border hover:border-primary transition-all group">
                 <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   <Phone className="w-8 h-8 text-white" />
                 </div>
                 <div>
                   <p className="text-muted-foreground text-sm uppercase font-black tracking-widest">Sunați acum (24/7)</p>
-                  <p className="text-3xl font-black text-white">0700 000 000</p>
+                  <p className="text-3xl font-black text-white">+40 742 916 370</p>
                 </div>
               </a>
 
-              <a href="https://wa.me/40700000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 p-6 rounded-3xl bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all group">
+              <a href="https://wa.me/40742916370" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 p-6 rounded-3xl bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all group">
                 <div className="w-16 h-16 rounded-2xl bg-[#25D366] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   <MessageCircle className="w-8 h-8 text-white" />
                 </div>
@@ -56,7 +56,7 @@ export default function Contact() {
                 </div>
                 <div className="flex items-center gap-4">
                   <MapPin className="w-5 h-5 text-primary" />
-                  <span className="font-bold">Sibiu, Județul Sibiu, România</span>
+                  <span className="font-bold">Sibiu, România (Acoperire Județeană)</span>
                 </div>
               </div>
             </div>

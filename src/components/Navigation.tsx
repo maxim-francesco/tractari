@@ -11,7 +11,7 @@ export default function Navigation() {
 
   const navLinks = [
     { name: 'Servicii', href: '#servicii' },
-    { name: 'Despre noi', href: '#despre' },
+    { name: 'Acoperire', href: '#coverage' },
     { name: 'Testimoniale', href: '#testimoniale' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -41,9 +41,9 @@ export default function Navigation() {
             </Link>
           ))}
           <Button variant="default" className="bg-primary hover:bg-primary/90 rounded-full font-bold h-11 px-6 shadow-lg shadow-primary/20" asChild>
-            <a href="tel:0700000000">
+            <a href="tel:+40742916370">
               <Phone className="w-4 h-4 mr-2" />
-              0700 000 000
+              +40 742 916 370
             </a>
           </Button>
         </div>
@@ -51,7 +51,7 @@ export default function Navigation() {
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-2">
           <Button variant="ghost" size="icon" className="text-primary" asChild>
-            <a href="tel:0700000000">
+            <a href="tel:+40742916370">
               <Phone className="w-5 h-5" />
             </a>
           </Button>
@@ -78,7 +78,7 @@ export default function Navigation() {
             </Link>
           ))}
           <Button className="w-full bg-primary font-bold h-14 text-lg" asChild>
-            <a href="tel:0700000000">Sunați Acum: 0700 000 000</a>
+            <a href="tel:+40742916370">Sună: +40 742 916 370</a>
           </Button>
         </div>
       </div>

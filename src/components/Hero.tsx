@@ -34,14 +34,14 @@ export default function Hero() {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl leading-relaxed font-medium">
-            Servicii profesionale de asistență rutieră și transport pe platformă. Ajungem la tine în maxim 30 de minute oriunde în județul Sibiu.
+            Servicii profesionale de asistență rutieră și transport pe platformă. Ajungem la tine rapid oriunde în județul Sibiu.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 mb-16">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black h-16 px-10 text-xl rounded-2xl shadow-[0_0_30px_rgba(255,107,0,0.3)] group" asChild>
-              <a href="tel:0700000000">
+              <a href="tel:+40742916370">
                 <Phone className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" />
-                SUNĂ ACUM: 0700 000 000
+                SUNĂ ACUM: +40 742 916 370
               </a>
             </Button>
             <Button size="lg" variant="outline" className="h-16 px-10 text-xl rounded-2xl border-white/20 hover:bg-white/5 font-bold" asChild>
@@ -55,8 +55,8 @@ export default function Hero() {
                 <Clock className="w-7 h-7 text-primary" />
               </div>
               <div className="flex flex-col">
-                <span className="font-black text-lg uppercase tracking-tight">Non-Stop</span>
-                <span className="text-muted-foreground text-sm">Disponibili 24/7</span>
+                <span className="font-black text-lg uppercase tracking-tight">Disponibili 24/7</span>
+                <span className="text-muted-foreground text-sm">Non-stop la datorie</span>
               </div>
             </div>
             <div className="flex items-center gap-4 group">
@@ -64,8 +64,8 @@ export default function Hero() {
                 <CheckCircle className="w-7 h-7 text-primary" />
               </div>
               <div className="flex flex-col">
-                <span className="font-black text-lg uppercase tracking-tight">30 Min</span>
-                <span className="text-muted-foreground text-sm">Timp de răspuns</span>
+                <span className="font-black text-lg uppercase tracking-tight">Ajungem în 30 min</span>
+                <span className="text-muted-foreground text-sm">Timp record de răspuns</span>
               </div>
             </div>
             <div className="flex items-center gap-4 group">

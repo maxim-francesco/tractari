@@ -1,39 +1,55 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Truck, Navigation, Settings, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Truck, Car, Wrench, Battery, TriangleAlert, Fuel, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const services = [
   {
-    id: 'tractari',
-    title: 'Tractări Auto',
-    description: 'Recuperare și transport pentru autoturisme, SUV-uri sau autoutilitare avariate.',
-    icon: Truck,
+    id: 'autoturisme',
+    title: 'Tractări Autoturisme',
+    description: 'Transport sigur pentru orice tip de autoturism, inclusiv mașini accidentate sau fără roți.',
+    icon: Car,
     image: 'hero-tow-truck',
     href: '/tractari-auto-sibiu'
   },
   {
-    id: 'transport',
-    title: 'Transport Auto',
-    description: 'Transport pe platformă la nivel național și internațional în condiții de maximă siguranță.',
-    icon: Navigation,
+    id: 'suv-dubite',
+    title: 'Tractări SUV & Dubite',
+    description: 'Platformă specială pentru vehicule mai mari și mai grele, inclusiv SUV-uri și utilitare.',
+    icon: Truck,
+    image: 'car-transport',
+    href: '/tractari-auto-sibiu'
+  },
+  {
+    id: 'utilaje',
+    title: 'Transport Utilaje',
+    description: 'Transportăm utilaje și echipamente grele cu platforme specializate din Sibiu.',
+    icon: Wrench,
     image: 'car-transport',
     href: '/transport-auto-sibiu'
   },
   {
-    id: 'asistenta',
-    title: 'Asistență Rutieră',
-    description: 'Intervenții rapide 24/7 pentru orice tip de incident rutier în Sibiu.',
-    icon: ShieldCheck,
-    image: 'emergency-service',
-    href: '/asistenta-rutiera-sibiu'
+    id: 'curent',
+    title: 'Pornire Curent',
+    description: 'Bateria te-a lăsat? Venim rapid pentru pornire de la baterie externă în Sibiu și A1.',
+    icon: Battery,
+    image: 'roadside-assistance',
+    href: '/depanare-auto-sibiu'
   },
   {
-    id: 'depanare',
-    title: 'Depanare pe Loc',
-    description: 'Ajutor pentru baterie, roată, alimentare greșită sau deblocare uși fără daune.',
-    icon: Settings,
+    id: 'pana',
+    title: 'Pană de Cauciuc',
+    description: 'Asistență rapidă pentru schimbarea roților sau transport către vulcanizare 24/7.',
+    icon: TriangleAlert,
+    image: 'emergency-service',
+    href: '/depanare-auto-sibiu'
+  },
+  {
+    id: 'alimentare',
+    title: 'Alimentare Greșită',
+    description: 'Ajutor profesional în cazul alimentării cu combustibil nepotrivit. Golire rezervor pe loc.',
+    icon: Fuel,
     image: 'roadside-assistance',
     href: '/depanare-auto-sibiu'
   }
@@ -45,20 +61,20 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter">
-            Servicii <span className="text-primary">Complete</span>
+            Servicii <span className="text-primary">Profesionale</span>
           </h2>
           <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8"></div>
           <p className="text-muted-foreground text-xl max-w-3xl mx-auto font-medium">
-            Suntem pregătiți să intervenim cu echipamente moderne pentru a vă oferi soluții rapide în orice situație.
+            Oferim soluții complete de asistență rutieră și tractări auto cu echipamente moderne și personal calificat.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => {
             const serviceImg = PlaceHolderImages.find(img => img.id === service.image);
             return (
               <Link key={service.id} href={service.href} className="group">
-                <Card className="h-full overflow-hidden border border-border bg-secondary/20 hover:border-primary/50 hover:bg-secondary/40 transition-all duration-300 rounded-3xl group">
+                <Card className="h-full overflow-hidden border border-border bg-secondary/20 hover:border-primary/50 hover:bg-secondary/40 transition-all duration-300 rounded-3xl">
                   <div className="relative h-48">
                     <Image
                       src={serviceImg?.imageUrl || 'https://picsum.photos/600/400'}

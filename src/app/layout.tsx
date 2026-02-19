@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Tractări Auto Sibiu | Servicii 24/7 | 0700 000 000',
-  description: 'Tractări auto Sibiu rapid și profesional. Disponibili 24/7, timp răspuns 30 minute. Acoperim tot județul Sibiu. Sună acum!',
-  keywords: ['tractări auto Sibiu', 'tractari masini sibiu', 'depanare auto sibiu', 'transport auto sibiu', 'asistență rutieră sibiu'],
+  title: 'Tractări Auto Sibiu | Servicii 24/7 | +40 742 916 370',
+  description: 'Tractări auto și asistență rutieră în Sibiu, Șelimbăr, Cisnădie și tot județul. Depanare, pornire curent, pană cauciuc. Disponibili 24/7. Sună: +40 742 916 370',
+  keywords: ['tractări auto Sibiu', 'tractari masini sibiu', 'depanare auto sibiu', 'transport auto sibiu', 'asistență rutieră sibiu', 'tractari autostrada A1'],
   metadataBase: new URL('https://tractarimasinisibiu.ro'),
   alternates: {
     canonical: '/',
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'Tractări Auto Sibiu | Servicii 24/7 | 0700 000 000',
-    description: 'Tractări auto Sibiu rapid și profesional. Disponibili 24/7, timp răspuns 30 minute. Acoperim tot județul Sibiu. Sună acum!',
+    title: 'Tractări Auto Sibiu | Servicii 24/7 | +40 742 916 370',
+    description: 'Servicii rapide de tractare și asistență rutieră în tot județul Sibiu. Intervenție în 30 de minute.',
     url: 'https://tractarimasinisibiu.ro',
     siteName: 'Tractări Mașini Sibiu',
     images: [
@@ -50,11 +50,12 @@ export default function RootLayout({
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Sibiu",
+      "addressRegion": "Sibiu",
       "addressCountry": "RO"
     },
-    "telephone": "0700000000",
+    "telephone": "+40742916370",
     "openingHours": "Mo-Su 00:00-24:00",
-    "areaServed": ["Sibiu", "Județul Sibiu"],
+    "areaServed": ["Sibiu", "Șelimbăr", "Cisnădie", "Avrig", "Tălmaciu", "Ocna Sibiului", "Mediaș", "Agnita", "Dumbrăveni", "Păltiniș", "Rășinari", "Autostrada A1"],
     "priceRange": "$$"
   };
 

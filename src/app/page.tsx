@@ -6,7 +6,13 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
-import { Truck, Shield, Clock } from 'lucide-react';
+import { MapPin, Shield, Clock } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+const locations = [
+  "Sibiu", "Autostrada A1", "Șelimbăr", "Cisnădie", "Avrig", "Tălmaciu", 
+  "Ocna Sibiului", "Mediaș", "Agnita", "Dumbrăveni", "Păltiniș", "Rășinari"
+];
 
 export default function Home() {
   return (
@@ -16,7 +22,31 @@ export default function Home() {
       <TrustSignals />
       <Services />
       
-      <section id="despre" className="py-32 bg-secondary/5 overflow-hidden">
+      <section id="coverage" className="py-32 bg-secondary/5">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter">
+              Acoperim Sibiu și <span className="text-primary">Împrejurimile</span>
+            </h2>
+            <p className="text-muted-foreground text-xl max-w-3xl mx-auto font-medium">
+              Oferim servicii de tractare auto și asistență rutieră în tot județul Sibiu, inclusiv pe Autostrada A1 și în localități precum Șelimbăr. Indiferent unde te afli, ajungem la tine rapid și sigur.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {locations.map((loc) => (
+              <div key={loc} className="flex items-center gap-3 p-4 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all group">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
+                  <MapPin className="w-5 h-5 text-primary group-hover:text-white" />
+                </div>
+                <span className="font-bold uppercase tracking-tight text-sm md:text-base">{loc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="despre" className="py-32 bg-background overflow-hidden border-t border-border">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-20">
             <div className="flex-1 order-2 md:order-1">
@@ -25,10 +55,10 @@ export default function Home() {
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-8 font-headline uppercase tracking-tighter leading-tight">
                 Lideri Locali în <br />
-                <span className="text-primary">Tractări Auto</span>
+                <span className="text-primary">Asistență Rutieră</span>
               </h2>
               <p className="text-muted-foreground text-xl leading-relaxed mb-8 font-medium">
-                Cu o experiență de peste 10 ani în domeniul asistenței rutiere, echipa noastră din Sibiu a ajutat mii de șoferi să ajungă în siguranță la destinație.
+                Cu o experiență bogată în domeniul asistenței rutiere, echipa noastră din Sibiu este partenerul pe care te poți baza oricând ai o problemă cu vehiculul tău.
               </p>
               
               <div className="space-y-6 mb-12">
@@ -46,8 +76,8 @@ export default function Home() {
                     <div className="w-2 h-2 rounded-full bg-primary" />
                   </div>
                   <div>
-                    <h4 className="font-black uppercase tracking-tight text-lg">Echipamente Moderne</h4>
-                    <p className="text-muted-foreground">Folosim platforme de ultimă generație dotate cu sisteme de ancorare profesionale.</p>
+                    <h4 className="font-black uppercase tracking-tight text-lg">Echipamente Profesionale</h4>
+                    <p className="text-muted-foreground">Folosim platforme moderne și roboți de pornire de ultimă generație.</p>
                   </div>
                 </div>
               </div>
@@ -55,7 +85,7 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-6">
                 <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
                   <div className="text-primary font-black text-4xl mb-2 tracking-tighter">100%</div>
-                  <div className="text-sm text-muted-foreground font-bold uppercase tracking-widest">Clienți Mulțumiți</div>
+                  <div className="text-sm text-muted-foreground font-bold uppercase tracking-widest">Profesionalism</div>
                 </div>
                 <div className="p-6 rounded-2xl border border-border bg-background shadow-xl">
                   <div className="text-primary font-black text-4xl mb-2 tracking-tighter">24/7</div>
@@ -71,7 +101,7 @@ export default function Home() {
                 <img 
                   src="https://picsum.photos/seed/experience/800/800" 
                   alt="Echipa Tractări Sibiu Intervenție" 
-                  className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                  className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
                 />
               </div>
             </div>
