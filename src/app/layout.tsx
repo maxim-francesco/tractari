@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({
@@ -60,7 +61,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="ro" className={`scroll-smooth ${inter.variable}`}>
+    <html lang="ro" className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#FF6B00" />
@@ -71,6 +72,20 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary selection:text-white">
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XYEP1TJYMQ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-XYEP1TJYMQ');
+          `}
+        </Script>
         {children}
       </body>
     </html>
