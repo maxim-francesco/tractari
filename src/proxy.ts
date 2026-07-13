@@ -4,6 +4,15 @@ import { logAdsClick } from './lib/ads-click-log';
 
 export function proxy(request: NextRequest, event: NextFetchEvent) {
   try {
+    const isPrefetch =
+      request.headers.has('next-router-prefetch') ||
+      request.headers.get('purpose') === 'prefetch' ||
+      request.headers.has('x-middleware-prefetch');
+
+    if (isPrefetch) {
+      return NextResponse.next();
+    }
+
     const { searchParams, pathname, search } = request.nextUrl;
     const gclid = searchParams.get('gclid');
     const gbraid = searchParams.get('gbraid');
