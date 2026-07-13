@@ -50,7 +50,7 @@ export default function DepanareAutoPage() {
             Nu orice problemă necesită tractare. Echipa noastră de depanatori auto din Sibiu intervine pentru a te repune la drum în cel mai scurt timp posibil.
           </p>
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold h-14 px-10 rounded-xl text-lg" asChild>
-            <a href="tel:0700000000">
+            <a href="tel:+40742916370">
               <Phone className="w-5 h-5 mr-3" />
               SUNAȚI PENTRU ASISTENȚĂ
             </a>

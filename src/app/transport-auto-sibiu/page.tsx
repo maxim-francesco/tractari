@@ -40,7 +40,7 @@ export default function TransportAutoPage() {
             </p>
             <div className="flex gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold h-14 px-8 rounded-xl shadow-xl shadow-primary/20" asChild>
-                <a href="tel:0700000000">Cere Ofertă: 0700 000 000</a>
+                <a href="tel:+40742916370">Cere Ofertă: +40 742 916 370</a>
               </Button>
             </div>
           </div>
