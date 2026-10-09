@@ -4,12 +4,14 @@ import { logAdsClick } from './lib/ads-click-log';
 
 export function proxy(request: NextRequest, event: NextFetchEvent) {
   try {
-    const isPrefetch =
+    const isAppRouterDataOrPrefetch =
+      request.headers.has('rsc') ||
+      request.nextUrl.searchParams.has('_rsc') ||
       request.headers.has('next-router-prefetch') ||
       request.headers.get('purpose') === 'prefetch' ||
       request.headers.has('x-middleware-prefetch');
 
-    if (isPrefetch) {
+    if (isAppRouterDataOrPrefetch) {
       return NextResponse.next();
     }
 
@@ -33,50 +35,91 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
         click_id_type = 'wbraid';
       }
 
-      const xForwardedFor = request.headers.get('x-forwarded-for');
-      let ip = 'unknown';
-      if (xForwardedFor) {
-        const parts = xForwardedFor.split(',');
-        if (parts[0]) {
-          ip = parts[0].trim();
-        }
-      } else {
-        const xRealIp = request.headers.get('x-real-ip');
-        if (xRealIp) {
-          ip = xRealIp.trim();
-        }
-      }
-
-      const user_agent = request.headers.get('user-agent') || undefined;
-      const landing_path = pathname + search;
       const referer = request.headers.get('referer') || undefined;
 
-      const country = request.headers.get('x-vercel-ip-country') || undefined;
-      const region = request.headers.get('x-vercel-ip-country-region') || undefined;
-      
-      let city: string | undefined = undefined;
-      const xVercelIpCity = request.headers.get('x-vercel-ip-city');
-      if (xVercelIpCity) {
+      let isSameOriginDuplicate = false;
+      if (referer) {
         try {
-          city = decodeURIComponent(xVercelIpCity);
+          const refererUrl = new URL(referer);
+          const requestHost = request.headers.get('host') || request.nextUrl.host;
+          const normRefererHost = refererUrl.host.replace(/^www\./, '');
+          const normRequestHost = requestHost.replace(/^www\./, '');
+
+          if (normRefererHost === normRequestHost) {
+            const refererClickId =
+              refererUrl.searchParams.get('gclid') ||
+              refererUrl.searchParams.get('gbraid') ||
+              refererUrl.searchParams.get('wbraid');
+
+            if (refererClickId === click_id) {
+              isSameOriginDuplicate = true;
+            }
+          }
         } catch {
-          city = xVercelIpCity;
+          // Ignore invalid referer URL
         }
       }
 
-      const record = {
-        click_id,
-        click_id_type,
-        ip,
-        user_agent,
-        landing_path,
-        referer,
-        country,
-        region,
-        city,
-      };
+      const loggedClickId = request.cookies.get('ads_logged')?.value;
+      const isCookieDuplicate = loggedClickId === click_id;
 
-      event.waitUntil(logAdsClick(record));
+      const response = NextResponse.next();
+
+      if (!isSameOriginDuplicate && !isCookieDuplicate) {
+        const xForwardedFor = request.headers.get('x-forwarded-for');
+        let ip = 'unknown';
+        if (xForwardedFor) {
+          const parts = xForwardedFor.split(',');
+          if (parts[0]) {
+            ip = parts[0].trim();
+          }
+        } else {
+          const xRealIp = request.headers.get('x-real-ip');
+          if (xRealIp) {
+            ip = xRealIp.trim();
+          }
+        }
+
+        const user_agent = request.headers.get('user-agent') || undefined;
+        const landing_path = pathname + search;
+
+        const country = request.headers.get('x-vercel-ip-country') || undefined;
+        const region = request.headers.get('x-vercel-ip-country-region') || undefined;
+
+        let city: string | undefined = undefined;
+        const xVercelIpCity = request.headers.get('x-vercel-ip-city');
+        if (xVercelIpCity) {
+          try {
+            city = decodeURIComponent(xVercelIpCity);
+          } catch {
+            city = xVercelIpCity;
+          }
+        }
+
+        const record = {
+          click_id,
+          click_id_type,
+          ip,
+          user_agent,
+          landing_path,
+          referer,
+          country,
+          region,
+          city,
+        };
+
+        event.waitUntil(logAdsClick(record));
+
+        response.cookies.set('ads_logged', click_id, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production' || request.nextUrl.protocol === 'https:',
+          sameSite: 'lax',
+          path: '/',
+          maxAge: 1800,
+        });
+      }
+
+      return response;
     }
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
