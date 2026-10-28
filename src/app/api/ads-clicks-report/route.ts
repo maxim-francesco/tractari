@@ -6,9 +6,13 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
     const keyParam = request.nextUrl.searchParams.get('key');
+    const authHeader = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+    const headerKey = request.headers.get('x-api-key');
     const reportKey = process.env.ADS_REPORT_KEY;
 
-    if (!reportKey || keyParam !== reportKey) {
+    const providedKey = keyParam || authHeader || headerKey;
+
+    if (!reportKey || providedKey !== reportKey) {
       return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
     }
 
