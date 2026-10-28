@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "tractarimasinisibiu.ro" }],
+      "destination": "https://www.tractarimasinisibiu.ro/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*).(jpg|jpeg|png|webp|avif|svg|js|css|woff|woff2)",

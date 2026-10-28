@@ -1,10 +1,11 @@
-import { ShieldCheck, Clock, Zap, CreditCard } from 'lucide-react';
+import { MapPin, Clock, Phone, CreditCard } from 'lucide-react';
 
 const stats = [
-  { label: 'Ajungem în 20-30 minute', value: 'Răspuns Rapid', icon: Zap },
+  // TODO(confirmare operator): timp de sosire și asigurare, înainte de a le afișa ca promisiuni.
+  { label: 'Timp estimat spus la telefon', value: 'Sunați Direct', icon: Phone },
   { label: '24/7, 365 zile pe an', value: 'Non-Stop', icon: Clock },
-  { label: 'Fără costuri ascunse', value: 'Tarife Corecte', icon: CreditCard },
-  { label: 'Mașina ta este în siguranță', value: 'Asigurare CMR', icon: ShieldCheck },
+  { label: 'Stabilit înainte de plecare', value: 'Preț Clar', icon: CreditCard },
+  { label: 'Plus localitățile din jur', value: 'Sibiu și A1', icon: MapPin },
 ];
 
 export default function TrustSignals() {

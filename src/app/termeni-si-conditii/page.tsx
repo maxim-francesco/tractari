@@ -5,14 +5,13 @@ import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/termeni-si-conditii',
   title: 'Termeni și Condiții | Tractări Mașini Sibiu',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+  noindex: true,
+});
 
 export default function TermsPage() {
   return (
@@ -29,7 +28,7 @@ export default function TermsPage() {
           <h1 className="text-4xl md:text-5xl font-black font-headline mb-4 uppercase tracking-tighter">
             Termeni și <span className="text-primary">Condiții</span>
           </h1>
-          <p className="text-muted-foreground font-bold">Ultima actualizare: Februarie 2026</p>
+          <p className="text-muted-foreground font-bold">Ultima actualizare: Octombrie 2026</p>
         </div>
       </section>
 
@@ -46,7 +45,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">2. Servicii oferite</h2>
               <p>
-                Prestatorul oferă servicii de tractări auto, transport auto pe platformă, depanare auto și asistență rutieră în municipiul Sibiu, pe autostrada A1 și în tot județul Sibiu.
+                Prestatorul oferă servicii de tractări auto, transport auto pe platformă și asistență rutieră în municipiul Sibiu, în localitățile din jur și pe autostrada A1 în zona Sibiu. Disponibilitatea pentru alte localități și pentru un anumit vehicul se confirmă telefonic.
               </p>
             </div>
 
@@ -67,7 +66,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">5. Răspundere</h2>
               <p>
-                Toate transporturile noastre sunt acoperite de asigurare CMR. Prestatorul nu răspunde pentru daunele preexistente ale vehiculului care nu au fost declarate sau vizibile la momentul preluării pe platformă.
+                Condițiile de răspundere și asigurare pentru vehiculul transportat se comunică telefonic, înainte de începerea intervenției. Prestatorul nu răspunde pentru daunele preexistente ale vehiculului care nu au fost declarate sau vizibile la momentul preluării pe platformă.
               </p>
             </div>
 

@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog-data'
+import { absoluteUrl } from '@/lib/site'
 
+// Only final, indexable, self-canonical URLs. Noindex legal pages are left out.
+// No lastmod: there is no reliable modification date (build time is not one).
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tractarimasinisibiu.ro'
-  const lastModified = new Date()
-  
   const routes = [
-    '',
+    '/',
     '/tractari-auto-sibiu',
     '/transport-auto-sibiu',
     '/depanare-auto-sibiu',
@@ -14,23 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/intrebari-frecvente',
     '/contact',
     '/blog',
-    '/politica-de-confidentialitate',
-    '/termeni-si-conditii',
-    '/politica-cookies',
-    '/anpc',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified,
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1 : 0.8,
-  }))
+    ...blogPosts.map((post) => `/blog/${post.slug}`),
+  ]
 
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
-
-  return [...routes, ...blogRoutes]
+  return routes.map((route) => ({ url: absoluteUrl(route) }))
 }

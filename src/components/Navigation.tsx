@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Phone, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/site';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
@@ -48,17 +49,17 @@ export default function Navigation() {
             </Link>
           ))}
           <Button variant="default" className="bg-primary hover:bg-primary/90 rounded-full font-bold h-11 px-6 shadow-lg shadow-primary/20" asChild>
-            <a href="tel:+40742916370" aria-label="Sună la +40 742 916 370">
+            <a href={PHONE_HREF} data-cta="nav-desktop" aria-label={`Sună la ${PHONE_DISPLAY}`}>
               <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
-              +40 742 916 370
+              {PHONE_DISPLAY}
             </a>
           </Button>
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-2">
           <Button variant="ghost" size="icon" className="text-primary" asChild>
-            <a href="tel:+40742916370" aria-label="Sună acum la +40 742 916 370">
+            <a href={PHONE_HREF} data-cta="nav-mobile" aria-label={`Sună acum la ${PHONE_DISPLAY}`}>
               <Phone className="w-5 h-5" aria-hidden="true" />
             </a>
           </Button>
@@ -79,7 +80,7 @@ export default function Navigation() {
       <div 
         id="mobile-menu"
         className={cn(
-          "absolute top-16 left-0 w-full bg-background border-b border-border transition-all duration-300 overflow-hidden md:hidden",
+          "absolute top-16 left-0 w-full bg-background border-b border-border transition-all duration-300 overflow-hidden lg:hidden",
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         )}
       >
@@ -99,7 +100,7 @@ export default function Navigation() {
             </Link>
           ))}
           <Button className="w-full bg-primary font-bold h-14 text-lg" asChild>
-            <a href="tel:+40742916370">Sună: +40 742 916 370</a>
+            <a href={PHONE_HREF} data-cta="nav-menu">Sună: {PHONE_DISPLAY}</a>
           </Button>
         </div>
       </div>

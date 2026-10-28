@@ -5,8 +5,9 @@ import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import { blogPosts } from '@/lib/blog-data';
 import { Button } from '@/components/ui/button';
-import { Phone, Calendar, Clock, ArrowLeft, ChevronRight, MessageCircle } from 'lucide-react';
+import { Phone, Calendar, Clock, ArrowLeft, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import { BUSINESS_ID, JsonLd, PHONE_DISPLAY, PHONE_HREF, WHATSAPP_URL, absoluteUrl, breadcrumbJsonLd, pageMetadata } from '@/lib/site';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -25,19 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Articol negăsit' };
 
   return {
-    title: `${post.title} | Blog Tractări Sibiu`,
-    description: post.excerpt,
-    keywords: post.keywords,
-    alternates: {
-      canonical: `https://tractarimasinisibiu.ro/blog/${slug}`,
-    },
-    openGraph: {
-      title: post.title,
+    ...pageMetadata({
+      path: `/blog/${slug}`,
+      title: post.seoTitle,
       description: post.excerpt,
-      url: `https://tractarimasinisibiu.ro/blog/${slug}`,
-      type: 'article',
+      openGraphType: 'article',
       publishedTime: post.date,
-    },
+    }),
+    keywords: post.keywords,
   };
 }
 
@@ -47,33 +43,25 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
+  const url = absoluteUrl(`/blog/${slug}`);
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
     "headline": post.title,
     "description": post.excerpt,
     "datePublished": post.date,
-    "author": {
-      "@type": "Organization",
-      "name": "Tractări Mașini Sibiu"
-    }
-  };
-
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://tractarimasinisibiu.ro" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://tractarimasinisibiu.ro/blog" },
-      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://tractarimasinisibiu.ro/blog/${slug}` }
-    ]
+    "inLanguage": "ro-RO",
+    "mainEntityOfPage": url,
+    "author": { "@id": BUSINESS_ID },
+    "publisher": { "@id": BUSINESS_ID },
   };
 
   return (
     <main className="min-h-screen">
       <Navigation />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd([{ name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${slug}` }])} />
       
       {/* Reading Progress Indicator */}
       <div className="fixed top-16 left-0 w-full h-1 z-50 pointer-events-none">
@@ -117,11 +105,11 @@ export default async function BlogPostPage({ params }: Props) {
                   <div className="my-16 p-10 rounded-[2.5rem] bg-secondary/20 border border-primary/30 text-center relative overflow-hidden group">
                     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <h3 className="text-2xl font-black uppercase tracking-tight mb-4 relative z-10">Ai nevoie de ajutor acum?</h3>
-                    <p className="text-muted-foreground mb-8 font-medium relative z-10">Intervenim în Sibiu și pe autostrada A1 în maxim 30 de minute.</p>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black h-14 px-10 rounded-xl text-lg relative z-10" asChild>
-                      <a href="tel:+40742916370">
+                    <p className="text-muted-foreground mb-8 font-medium relative z-10">Preluăm apeluri non-stop pentru Sibiu, împrejurimi și A1. Prețul și timpul estimat vi le spunem la telefon.</p>
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black h-auto min-h-14 py-3 whitespace-normal max-w-full px-6 sm:px-10 rounded-xl text-lg relative z-10" asChild>
+                      <a href={PHONE_HREF} data-cta="article-mid">
                         <Phone className="w-5 h-5 mr-3" />
-                        +40 742 916 370
+                        {PHONE_DISPLAY}
                       </a>
                     </Button>
                   </div>
@@ -130,19 +118,41 @@ export default async function BlogPostPage({ params }: Props) {
             ))}
           </div>
 
+          {/* Related links: other articles + the matching service pages */}
+          <nav aria-label="Articole și servicii similare" className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-border pt-12">
+            <div>
+              <h2 className="text-xl font-black uppercase tracking-tight mb-5">Articole similare</h2>
+              <ul className="space-y-3">
+                {blogPosts.filter((p) => p.slug !== post.slug).map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/blog/${p.slug}`} className="text-primary font-bold hover:underline">{p.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-xl font-black uppercase tracking-tight mb-5">Servicii în Sibiu</h2>
+              <ul className="space-y-3">
+                <li><Link href="/tractari-auto-sibiu" className="text-primary font-bold hover:underline">Tractări auto Sibiu cu platformă</Link></li>
+                <li><Link href="/asistenta-rutiera-sibiu" className="text-primary font-bold hover:underline">Asistență rutieră Sibiu non-stop</Link></li>
+                <li><Link href="/intrebari-frecvente" className="text-primary font-bold hover:underline">Întrebări frecvente despre tractări</Link></li>
+              </ul>
+            </div>
+          </nav>
+
           {/* End of article CTA */}
           <div className="mt-24 p-12 rounded-[3rem] bg-primary text-white text-center shadow-2xl shadow-primary/30">
-            <h2 className="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">Siguranța ta este prioritatea noastră</h2>
-            <p className="text-xl mb-10 opacity-90 font-medium">Suntem disponibili 24/7 pentru orice urgență rutieră în județul Sibiu.</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">Ai nevoie de tractare acum?</h2>
+            <p className="text-xl mb-10 opacity-90 font-medium">Sunați non-stop. Spuneți-ne locația și destinația, iar noi vă spunem prețul înainte de plecare.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-black h-16 px-10 rounded-2xl text-xl" asChild>
-                <a href="tel:+40742916370">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-black h-auto min-h-16 py-3 whitespace-normal max-w-full px-6 sm:px-10 rounded-2xl text-xl" asChild>
+                <a href={PHONE_HREF} data-cta="article-bottom">
                   <Phone className="w-6 h-6 mr-3" />
-                  +40 742 916 370
+                  {PHONE_DISPLAY}
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl border-white/40 hover:bg-white/10 font-black text-xl text-white" asChild>
-                <a href="https://wa.me/40742916370" target="_blank" rel="noopener noreferrer">
+                <a href={WHATSAPP_URL} data-cta="article-bottom" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-6 h-6 mr-3 text-white" />
                   WhatsApp
                 </a>

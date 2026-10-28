@@ -5,14 +5,14 @@ import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/site';
+import { CookieSettingsButton } from '@/components/ConsentBanner';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/politica-cookies',
   title: 'Politică Cookies | Tractări Mașini Sibiu',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+  noindex: true,
+});
 
 export default function CookiesPage() {
   return (
@@ -29,7 +29,7 @@ export default function CookiesPage() {
           <h1 className="text-4xl md:text-5xl font-black font-headline mb-4 uppercase tracking-tighter">
             Politică <span className="text-primary">Cookies</span>
           </h1>
-          <p className="text-muted-foreground font-bold">Ultima actualizare: Februarie 2026</p>
+          <p className="text-muted-foreground font-bold">Ultima actualizare: Octombrie 2026</p>
         </div>
       </section>
 
@@ -45,25 +45,37 @@ export default function CookiesPage() {
 
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">2. Ce cookie-uri folosim?</h2>
-              <p>
-                Website-ul nostru folosește <strong>exclusiv cookie-uri tehnice esențiale</strong>, necesare pentru operarea framework-ului Next.js și pentru asigurarea securității navigării.
-              </p>
+              <p><strong>Cookie-uri necesare</strong> (fără acord, pentru funcționarea site-ului):</p>
+              <ul className="list-disc pl-6 mt-2 space-y-2">
+                <li><strong>cookie_consent</strong>: păstrează alegerea dumneavoastră privind cookie-urile de măsurare (6 luni).</li>
+                <li>
+                  <strong>ads_logged</strong>: se setează doar când ajungeți pe site dintr-o reclamă Google (link cu parametrul gclid, gbraid sau wbraid), pentru 30 de minute.
+                  Împiedică înregistrarea repetată a aceleiași vizite din reclamă în jurnalul nostru de verificare a traficului publicitar (vezi Politica de confidențialitate).
+                </li>
+              </ul>
+              <p className="mt-6"><strong>Cookie-uri de măsurare</strong> (numai cu acordul dumneavoastră):</p>
+              <ul className="list-disc pl-6 mt-2 space-y-2">
+                <li><strong>Google Analytics 4</strong> (_ga, _ga_*): statistici despre paginile vizitate și apăsările pe butoanele de apel și WhatsApp. Durată: până la 2 ani.</li>
+                <li><strong>Google Ads</strong> (de exemplu _gcl_au, _gcl_aw): măsoară dacă o vizită venită dintr-o reclamă a dus la o apăsare pe butonul de apel. Durată: aproximativ 90 de zile.</li>
+              </ul>
               <p className="mt-4">
-                <strong>Nu folosim:</strong> Google Analytics, Facebook Pixel, Hotjar sau orice alt tip de cookie de tracking, publicitate sau analiză a comportamentului utilizatorului.
+                O apăsare pe butonul de apel înseamnă doar că s-a deschis aplicația de telefon. Nu înregistrăm conținutul sau durata apelurilor pe acest site.
               </p>
             </div>
 
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">3. Consimțământul</h2>
               <p>
-                Conform legislației în vigoare (Legea 506/2004), pentru utilizarea cookie-urilor strict necesare bunei funcționări a website-ului nu este necesar consimțământul prealabil al utilizatorului.
+                La prima vizită vă întrebăm dacă acceptați cookie-urile de măsurare. Până la alegere și dacă refuzați, Google Analytics și Google Ads nu plasează cookie-uri.
+                Folosim modul de consimțământ Google (Consent Mode): în lipsa acordului, Google poate primi semnale fără cookie-uri despre vizită, conform documentației Google.
               </p>
             </div>
 
             <div>
-              <h2 className="text-white text-2xl font-black uppercase mb-4">4. Administrarea cookie-urilor</h2>
+              <h2 className="text-white text-2xl font-black uppercase mb-4">4. Cum vă schimbați alegerea</h2>
               <p>
-                Puteți seta browserul dumneavoastră să blocheze sau să vă alerteze despre aceste cookie-uri, dar unele părți ale site-ului pot să nu funcționeze corect în acest caz. Toate browserele moderne permit schimbarea setărilor de cookie-uri din secțiunea "Opțiuni" sau "Preferințe".
+                Puteți schimba oricând alegerea din linkul „Setări cookies” din subsolul paginii sau de aici: <CookieSettingsButton className="font-bold text-primary underline" />.
+                La retragerea acordului ștergem cookie-urile Google Analytics și Google Ads de pe acest domeniu. Le puteți șterge și din setările browserului.
               </p>
             </div>
           </div>

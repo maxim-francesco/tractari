@@ -5,14 +5,13 @@ import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/anpc',
   title: 'ANPC | Tractări Mașini Sibiu',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+  noindex: true,
+});
 
 export default function AnpcPage() {
   return (

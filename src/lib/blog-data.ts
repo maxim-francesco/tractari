@@ -1,76 +1,82 @@
 export type BlogPost = {
   slug: string;
   title: string;
-  excerpt: string;
+  seoTitle: string; // 50-60 characters, used for <title>
+  excerpt: string; // 120-155 characters, used as meta description
   date: string;
   readTime: string;
   keywords: string[];
   content: string[]; // Array of paragraphs or HTML strings
 };
 
+// Dates: the articles were created in the repository on 2026-02-19 (commit b8b9b05);
+// the earlier 2025 dates predated the site. TODO(confirmare operator): real publish date.
+// TODO(confirmare operator): tarife, asigurare și servicii la fața locului menționate mai jos.
 export const blogPosts: BlogPost[] = [
   {
     slug: `ce-faci-cand-ramai-in-pana-pe-autostrada`,
+    seoTitle: `Pană pe Autostrada A1 lângă Sibiu: Ce Faci, Pas cu Pas`,
     title: `Ce Faci Când Rămâi în Pană pe Autostrada A1 lângă Sibiu?`,
-    date: `2025-05-15`,
-    readTime: `6 min`,
+    date: `2026-02-19`,
+    readTime: `5 min`,
     keywords: [`pană autostradă Sibiu`, `tractare A1 Sibiu`],
-    excerpt: `Rămâneți blocat pe autostradă poate fi o experiență stresantă și periculoasă. Iată pașii esențiali pentru siguranța dumneavoastră și cum să solicitați ajutor rapid.`,
+    excerpt: `Ai rămas în pană pe Autostrada A1 lângă Sibiu? Pașii de siguranță, ce informații pregătești și cum ceri tractare rapid, fără să te pui în pericol.`,
     content: [
-      `Autostrada A1, în special segmentul care traversează județul Sibiu, este una dintre cele mai circulate artere din România. O defecțiune tehnică sau o pană în acest regim de viteză necesită o reacție calmă și corectă pentru a evita accidentele grave.`,
-      `Primul și cel mai important pas este siguranța pasagerilor. Încercați să scoateți mașina pe banda de urgență cât mai mult posibil. Dacă este noapte sau vizibilitate redusă, lăsați luminile de poziție și avariile aprinse. Toți pasagerii trebuie să coboare din vehicul prin partea dreaptă (opusă traficului) și să se adăpostească în spatele parapetului de protecție.`,
-      `Montarea triunghiului reflectorizant este obligatorie, dar pe autostradă acesta trebuie plasat la o distanță mult mai mare decât în oraș, aproximativ 100 de metri în spatele mașinii, pentru a oferi șoferilor care circulă cu viteză timp suficient să reacționeze.`,
-      `Odată ce sunteți în siguranță, este momentul să apelați la un serviciu de tractări auto Sibiu specializat în intervenții pe autostradă. Nu orice platformă este echipată sau are autorizația necesară pentru a interveni rapid și sigur pe A1. Echipa noastră cunoaște toate punctele de acces și nodurile rutiere din jurul Sibiului, asigurând o evacuare rapidă a vehiculului.`,
-      `De ce este importantă tractarea rapidă? Banda de urgență nu este un loc sigur pentru reparații prelungite. Riscul de coliziune cu vehiculele de mare tonaj este real. Noi preluăm mașina și o transportăm la cel mai apropiat service din Sibiu sau la locația indicată de dumneavoastră, în siguranță deplină.`,
-      `Rețineți numărul nostru: +40 742 916 370. Suntem disponibili 24/7 pentru orice intervenție pe Autostrada A1, segmentul Sibiu - Deva sau Sibiu - Pitești.`
+      `O defecțiune la viteză de autostradă cere o reacție calmă și corectă. Pe A1, în zona Sibiu, traficul este rapid, iar banda de urgență nu este un loc sigur pentru staționare îndelungată.`,
+      `Primul pas este siguranța pasagerilor. Scoateți mașina cât mai mult pe banda de urgență și porniți luminile de avarie. Toți pasagerii coboară prin partea dreaptă, opusă traficului, și așteaptă în spatele parapetului de protecție, nu lângă mașină.`,
+      `Montați triunghiul reflectorizant doar dacă o puteți face în siguranță. Pe autostradă, triunghiul se pune mult mai departe în spatele mașinii decât în oraș, ca șoferii să aibă timp să reacționeze. Purtați vesta reflectorizantă.`,
+      `Când sunați pentru tractare, spuneți sensul de mers (spre Sibiu sau dinspre Sibiu), cel mai apropiat reper (kilometru, ieșire sau nod rutier), marca și modelul mașinii și ce s-a întâmplat. Așa vi se poate spune corect timpul estimat de sosire și prețul.`,
+      `Pe autostradă, de cele mai multe ori mașina este încărcată pe platformă și dusă la un service sau la adresa indicată, nu reparată pe banda de urgență.`,
+      `Pentru tractări autostrada A1 în zona Sibiu, sunați la +40 742 916 370. Preluăm apeluri non-stop.`
     ]
   },
   {
     slug: `cat-costa-o-tractare-auto-in-sibiu`,
-    title: `Cât Costă o Tractare Auto în Sibiu în 2025?`,
-    date: `2025-05-10`,
-    readTime: `5 min`,
+    seoTitle: `Cât Costă o Tractare Auto în Sibiu? Preț Tractare pe Km`,
+    title: `Cât Costă o Tractare Auto în Sibiu? De Ce Depinde Prețul`,
+    date: `2026-02-19`,
+    readTime: `4 min`,
     keywords: [`preț tractare Sibiu`, `tarif tractare auto Sibiu`],
-    excerpt: `Transparența prețurilor este esențială în asistența rutieră. Aflați cum se calculează tarifele pentru tractări auto în Sibiu și ce factori influențează costul final.`,
+    excerpt: `Tractări auto Sibiu, preț: ce influențează costul, cum se calculează prețul tractării pe km și ce să întrebați înainte de plecarea platformei.`,
     content: [
-      `Când ai nevoie de o platformă auto, una dintre primele întrebări este: 'Cât mă va costa?'. În 2025, piața de tractări auto din Sibiu a devenit mult mai competitivă, oferind prețuri corecte pentru clienți, însă este important să înțelegeți cum se formează aceste tarife.`,
-      `În general, o tractare locală în municipiul Sibiu pentru un autoturism de talie medie începe de la o sumă fixă de bază (aproximativ 150-200 RON). Acest tarif acoperă deplasarea echipajului, încărcarea și descărcarea vehiculului în limitele orașului.`,
-      `Factorii care pot mări acest preț includ: greutatea vehiculului (un SUV sau o autoutilitară necesită o platformă mai mare), starea tehnică a mașinii (roți blocate, cutie de viteze blocată sau avarii grave în urma unui accident) și momentul intervenției. Deși noi oferim servicii 24/7, intervențiile nocturne pot avea uneori un cost ușor ridicat din cauza logisticii suplimentare.`,
-      `Pentru transportul în afara Sibiului, se aplică un tarif pe kilometru, calculat pentru distanța dus-întors. Este esențial să cereți o ofertă clară de la început. Noi ne mândrim cu faptul că oferim prețuri fixe, stabilite telefonic, fără 'surprize' neplăcute la destinație.`,
-      `Asigurarea CMR este un alt element inclus în prețul nostru. Aceasta vă garantează că, în cazul puțin probabil al unui incident pe platformă, vehiculul dumneavoastră este protejat financiar. Nu acceptați niciodată un serviciu de tractare 'la negru' fără asigurare, deoarece riscați pierderi imense.`,
-      `Sunați-ne la +40 742 916 370 pentru o cotație instantă. Operatorii noștri vă vor oferi prețul corect pe loc, în funcție de locația și problema dumneavoastră.`
+      `Când aveți nevoie de o platformă auto, una dintre primele întrebări este: „Cât mă va costa?”. Un preț corect se poate spune doar după ce se știu câteva detalii despre situația dumneavoastră.`,
+      `Prețul depinde în principal de distanța de la locul preluării până la destinație, de tipul și masa vehiculului și de starea lui: o mașină care rulează se încarcă mai simplu decât una cu roți blocate, cutie de viteze blocată sau avarii după un accident.`,
+      `Pentru transporturile în afara orașului, prețul unei tractări se calculează de obicei pe kilometru și contează și distanța pe care o parcurge platforma până la dumneavoastră și înapoi. De aceea, la telefon vi se cere locația exactă și destinația.`,
+      `Înainte să acceptați, întrebați: care este prețul total până la destinație, ce include, dacă se plătește ceva în plus noaptea sau pentru încărcare dificilă și cum puteți plăti.`,
+      `La noi, prețul vi-l spunem la telefon, înainte de plecarea platformei, după ce ne spuneți locația, destinația și ce vehicul aveți. Sunați la +40 742 916 370.`
     ]
   },
   {
     slug: `alimentare-gresita-ce-sa-faci`,
+    seoTitle: `Am Alimentat Greșit Mașina: Ce Faci? Benzină vs. Motorină`,
     title: `Am Alimentat Greșit Mașina — Ce Fac Acum?`,
-    date: `2025-05-05`,
-    readTime: `5 min`,
+    date: `2026-02-19`,
+    readTime: `4 min`,
     keywords: [`alimentare greșită Sibiu`, `benzină în loc de motorină`],
-    excerpt: `Ați pus benzină în loc de motorină sau invers? Nu intrați în panică! Greșeala este comună, dar modul în care reacționați poate salva motorul mașinii dumneavoastră.`,
+    excerpt: `Ai pus benzină în loc de motorină sau invers? Nu porni motorul. Află de ce, ce riști și ce pași urmezi ca reparația să coste cât mai puțin.`,
     content: [
-      `Se întâmplă și celor mai experimentați șoferi: oboseala sau graba pot duce la alegerea pompei greșite la benzinărie. Dacă ați realizat greșeala înainte de a porni motorul, sunteți norocos. Dacă ați pornit deja la drum și mașina a început să scoată fum sau să bată motorul, opriți imediat.`,
-      `Regula de aur: NU PORNIȚI MOTORUL. Dacă motorul nu a fost pornit, combustibilul greșit a rămas doar în rezervor. Odată ce puneți contactul, pompa de motorină/benzină va trimite amestecul dăunător prin sistemul de injecție, putând cauza daune de mii de euro.`,
-      `Pasul următor este să ne contactați. Oferim servicii de depanare auto Sibiu specializate pentru golirea rezervorului. Putem tracta mașina întrun loc sigur sau, în anumite cazuri, putem interveni direct la fața locului pentru a extrage combustibilul contaminat.`,
-      `Ce se întâmplă tehnic? Benzina în motorină acționează ca un solvent, distrugând ungerea pompei de înaltă presiune și a injectoarelor. Motorina în benzină va înfunda bujiile și sistemul de evacuare, motorul refuzând să mai pornească după câțiva metri.`,
-      `Echipa noastră folosește echipamente profesionale pentru a goli rezervorul complet, curăța conductele și a repune mașina pe drum fără a afecta componentele interne. Este o intervenție mult mai ieftină decât înlocuirea sistemului de injecție.`,
-      `Indiferent de benzinăria din Sibiu unde vă aflați, sunați la +40 742 916 370. Ajungem în 20-30 de minute pentru a vă scoate din impas.`
+      `Se întâmplă și șoferilor cu experiență: oboseala sau graba duc la alegerea pompei greșite. Dacă ați observat greșeala înainte să porniți motorul, situația este mult mai ușor de rezolvat.`,
+      `Regula de bază: NU PORNIȚI MOTORUL și nu puneți contactul. Cât timp motorul nu a pornit, combustibilul greșit a rămas în rezervor. La pornire, pompa trimite amestecul în sistemul de alimentare, iar reparația poate deveni mult mai scumpă.`,
+      `Dacă ați pornit deja și mașina merge greu, scoate fum sau se oprește, opriți în siguranță cât mai repede și nu mai încercați să o porniți.`,
+      `De obicei, mașina trebuie dusă la un service care poate goli rezervorul și verifica sistemul de alimentare. Spuneți-ne la telefon ce combustibil ați pus, cât și dacă ați pornit motorul.`,
+      `Pentru tractare la service în Sibiu și împrejurimi, sunați la +40 742 916 370. Vă spunem prețul și timpul estimat înainte de plecare.`
     ]
   },
   {
     slug: `cum-alegi-un-serviciu-de-tractare-de-incredere`,
+    seoTitle: `Cum Alegi o Firmă de Tractări de Încredere în Sibiu`,
     title: `Cum Alegi un Serviciu de Tractare de Încredere în Sibiu?`,
-    date: `2025-04-28`,
-    readTime: `5 min`,
+    date: `2026-02-19`,
+    readTime: `4 min`,
     keywords: [`tractare auto Sibiu`, `serviciu tractare Sibiu`],
-    excerpt: `Nu toate serviciile de tractare sunt egale. Aflați care sunt criteriile de selecție pentru o firmă serioasă și ce 'semnale de alarmă' trebuie să evitați.`,
+    excerpt: `Întrebările simple care vă ajută să alegeți o firmă de tractări serioasă în Sibiu și să evitați surprizele la preț sau la predarea mașinii.`,
     content: [
-      `În momentele critice, când sunteți blocat pe marginea drumului, tentația este să sunați la primul număr găsit pe internet. Totuși, alegerea unei firme neserioase de tractări auto Sibiu vă poate aduce costuri mai mari și daune suplimentare mașinii.`,
-      `Primul criteriu: Legalitatea și Asigurarea. O firmă de încredere trebuie să dețină licență de transport și asigurare CMR (Transport de Mărfuri pe Drumuri). Această asigurare este singura care vă protejează bunul în timpul transportului. Întrebați întotdeauna dacă transportul este asigurat.`,
-      `Al doilea criteriu: Transparența tarifului. Evitați firmele care nu vă pot oferi un preț estimativ la telefon sau care folosesc termeni vagi precum 'vedem la fața locului'. O firmă profesionistă are tarife clare per kilometru și per intervenție.`,
-      `Timpul de răspuns este crucial. În Sibiu, o firmă cu o flotă adecvată ar trebui să ajungă la dumneavoastră în maxim 30-40 de minute. Dacă vi se promite o oră și trece mult mai mult, înseamnă că logistica firmei respective este deficitară.`,
-      `Echipamentul contează. Platformele moderne, dotate cu trolii puternice și accesorii de ancorare sigure, reduc riscul de zgârieturi sau avarii la suspensie. Verificați recenziile altor clienți pentru a vedea cum este tratată proprietatea lor.`,
-      `Noi, la Tractări Sibiu, punem accent pe respect și profesionalism. Fiecare client primește o estimare corectă, un timp de răspuns rapid și garanția unui transport sigur. Ne găsiți oricând la +40 742 916 370.`
+      `Când sunteți blocat pe marginea drumului, tentația este să sunați la primul număr găsit. Câteva întrebări puse la telefon vă pot scuti de costuri neașteptate și de probleme la predarea mașinii.`,
+      `Întrebați cine prestează serviciul: o firmă identificabilă are datele de identificare (denumire, CUI) afișate pe site sau le poate spune la telefon.`,
+      `Cereți prețul total înainte de plecarea platformei. Un serviciu serios vă spune prețul după ce află locația, destinația și tipul vehiculului, nu „vedem la fața locului”.`,
+      `Întrebați ce se întâmplă dacă mașina se deteriorează în timpul transportului și ce asigurare are transportatorul. Notați răspunsul.`,
+      `Cereți un timp estimat de sosire și sunați înapoi dacă se depășește mult. La predare, verificați mașina împreună cu șoferul și fotografiați eventualele daune existente înainte de încărcare.`,
+      `Pentru tractări în Sibiu, împrejurimi și pe A1, ne găsiți la +40 742 916 370. Vă spunem la telefon prețul și condițiile, înainte de plecare.`
     ]
   }
 ];

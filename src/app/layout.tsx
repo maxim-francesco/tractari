@@ -1,8 +1,14 @@
 import type {Metadata} from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import CallClickTracker from '@/components/CallClickTracker';
+import ConsentBanner from '@/components/ConsentBanner';
+import {
+  AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, JsonLd, LEGAL_NAME, PHONE_E164, SITE_HOST,
+  SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
+} from '@/lib/site';
+
+const GA_MEASUREMENT_ID = 'G-XYEP1TJYMQ';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,26 +16,103 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+// No global canonical/og:url here: each page sets its own (see pageMetadata in lib/site).
 export const metadata: Metadata = {
-  title: 'Tractări Auto Sibiu | Servicii 24/7 | +40 742 916 370',
-  description: 'Tractări auto și asistență rutieră în Sibiu, Șelimbăr, Cisnădie și tot județul. Depanare, pornire curent, pană cauciuc. Disponibili 24/7. Sună: +40 742 916 370',
-  keywords: ['tractări auto Sibiu', 'tractari masini sibiu', 'depanare auto sibiu', 'transport auto sibiu', 'asistență rutieră sibiu', 'tractari autostrada A1'],
-  metadataBase: new URL('https://tractarimasinisibiu.ro'),
-  alternates: {
-    canonical: '/',
-  },
+  metadataBase: new URL(SITE_URL),
+  title: 'Tractări Auto Sibiu Non-Stop | Platformă Auto și Asistență',
+  description: 'Tractări auto Sibiu non-stop: platformă auto, asistență rutieră și tractări pe Autostrada A1. Prețul vi-l spunem la telefon. Sunați: 0742 916 370',
   robots: {
     index: true,
     follow: true,
   },
+  // Fallback for pages without pageMetadata (e.g. noindex legal pages).
   openGraph: {
-    title: 'Tractări Auto Sibiu | Servicii 24/7 | +40 742 916 370',
-    description: 'Servicii rapide de tractare și asistență rutieră în tot județul Sibiu. Intervenție în 30 de minute.',
-    url: 'https://tractarimasinisibiu.ro',
-    siteName: 'Tractări Mașini Sibiu',
+    siteName: SITE_NAME,
     locale: 'ro_RO',
     type: 'website',
+    images: [{ url: ogImageUrl('/'), width: 1200, height: 630, alt: SITE_NAME, type: 'image/png' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    images: [ogImageUrl('/')],
+  },
+};
+
+// gtag.js is in the raw HTML (Google Ads website-call verification needs that) for
+// production builds, but not for Vercel preview deployments.
+const loadGoogleTag = process.env.VERCEL_ENV
+  ? process.env.VERCEL_ENV === 'production'
+  : process.env.NODE_ENV === 'production';
+
+// Consent Mode v2: everything denied until the visitor chooses. `config` runs only
+// on the production host, so localhost / preview hosts never send hits.
+const googleTagBootstrap = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  analytics_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});
+try {
+  if (/(?:^|; )${CONSENT_COOKIE}=granted/.test(document.cookie)) {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  }
+} catch (e) {}
+if (location.hostname === '${SITE_HOST}') {
+  gtag('js', new Date());
+  gtag('config', '${GA_MEASUREMENT_ID}');
+}
+`;
+
+// TODO(confirmare operator): adresa publică (dacă primește clienți), programul real
+// și localitățile deservite efectiv. Sediul legal din politici este în Rășinari.
+const siteGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AutomotiveBusiness',
+      '@id': BUSINESS_ID,
+      name: SITE_NAME,
+      legalName: LEGAL_NAME,
+      taxID: CUI,
+      url: absoluteUrl('/'),
+      telephone: PHONE_E164,
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: 'Sibiu',
+        addressCountry: 'RO',
+      },
+      areaServed: AREA_SERVED.map((name) => ({ '@type': 'City', name })),
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: PHONE_E164,
+        contactType: 'customer service',
+        availableLanguage: 'ro',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': WEBSITE_ID,
+      url: absoluteUrl('/'),
+      name: SITE_NAME,
+      inLanguage: 'ro-RO',
+      publisher: { '@id': BUSINESS_ID },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -37,58 +120,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    "name": "Tractări Mașini Sibiu",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Sibiu",
-      "addressRegion": "Sibiu",
-      "addressCountry": "RO"
-    },
-    "telephone": "+40742916370",
-    "openingHours": "Mo-Su 00:00-24:00",
-    "areaServed": ["Sibiu", "Șelimbăr", "Cisnădie", "Avrig", "Tălmaciu", "Ocna Sibiului", "Mediaș", "Agnita", "Dumbrăveni", "Păltiniș", "Rășinari", "Autostrada A1"],
-    "priceRange": "$$",
-    "hasMap": "https://maps.google.com/?q=Sibiu,Romania",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+40742916370",
-      "contactType": "customer service",
-      "availableLanguage": "Romanian",
-      "hoursAvailable": "Mo-Su 00:00-24:00"
-    }
-  };
-
   return (
     <html lang="ro" className={`scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#FF6B00" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: googleTagBootstrap }} />
+        {loadGoogleTag && (
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        )}
+        <JsonLd data={siteGraph} />
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary selection:text-white">
         <CallClickTracker />
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XYEP1TJYMQ"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-XYEP1TJYMQ');
-          `}
-        </Script>
         {children}
+        <ConsentBanner />
       </body>
     </html>
   );

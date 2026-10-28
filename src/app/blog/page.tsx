@@ -6,14 +6,13 @@ import { blogPosts } from '@/lib/blog-data';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { pageMetadata } from '@/lib/site';
 
-export const metadata: Metadata = {
-  title: 'Blog | Sfaturi Tractări Auto Sibiu | Tractări Mașini Sibiu',
-  description: 'Articole utile despre tractări auto, depanare și asistență rutieră în Sibiu. Sfaturi practice pentru șoferi, prețuri și ghiduri de siguranță.',
-  alternates: {
-    canonical: 'https://tractarimasinisibiu.ro/blog',
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  path: '/blog',
+  title: 'Blog Tractări Auto Sibiu | Sfaturi pentru Șoferi în Pană',
+  description: 'Articole despre tractări auto, depanare și asistență rutieră în Sibiu și pe A1: ce faci în pană, cum se stabilește prețul, alimentare greșită.',
+});
 
 export default function BlogListingPage() {
   return (
@@ -23,7 +22,7 @@ export default function BlogListingPage() {
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/20 to-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-black font-headline mb-6 uppercase tracking-tighter">
-            Articole și <span className="text-primary italic">Sfaturi Utile</span>
+            Blog Tractări Auto Sibiu: <span className="block text-primary">Sfaturi pentru Șoferi</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
             Descoperiți ghidurile noastre practice despre asistență rutieră, întreținere auto și siguranță pe drumurile din județul Sibiu.

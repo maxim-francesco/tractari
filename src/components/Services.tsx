@@ -6,42 +6,43 @@ const services = [
   {
     id: 'autoturisme',
     title: 'Tractări Autoturisme',
-    description: 'Transport sigur pentru orice tip de autoturism, inclusiv mașini accidentate sau fără roți.',
+    description: 'Tractare pe platformă pentru autoturisme, inclusiv mașini care nu mai pornesc sau sunt avariate. Confirmăm la telefon cum le preluăm.',
     icon: Car,
     href: '/tractari-auto-sibiu'
   },
   {
-    id: 'suv-dubite',
-    title: 'Tractări SUV & Dubite',
-    description: 'Platformă specială pentru vehicule mai mari și mai grele, inclusiv SUV-uri și utilitare.',
+    id: 'dube',
+    title: 'Tractări Dube',
+    description: 'Tractăm și dube, pe lângă autoturisme. Camioane și utilaje nu tractăm.',
     icon: Truck,
     href: '/tractari-auto-sibiu'
   },
   {
-    id: 'utilaje',
-    title: 'Transport Utilaje',
-    description: 'Transportăm utilaje și echipamente grele cu platforme specializate din Sibiu.',
+    id: 'transport',
+    title: 'Transport Programat',
+    description: 'Transport auto programat din Sibiu: la service, la RAR sau la o altă adresă. Stabilim ziua, ora și prețul la telefon.',
     icon: Wrench,
     href: '/transport-auto-sibiu'
   },
   {
     id: 'curent',
-    title: 'Pornire Curent',
-    description: 'Bateria te-a lăsat? Venim rapid pentru pornire de la baterie externă în Sibiu și A1.',
+    title: 'Baterie Descărcată',
+    description: 'Baterie descărcată? Sunați și vă spunem dacă putem porni mașina la fața locului.',
     icon: Battery,
     href: '/depanare-auto-sibiu'
   },
   {
     id: 'pana',
     title: 'Pană de Cauciuc',
-    description: 'Asistență rapidă pentru schimbarea roților sau transport către vulcanizare 24/7.',
+    description: 'Ajutor la montarea roții de rezervă sau tractare până la vulcanizare.',
     icon: TriangleAlert,
     href: '/depanare-auto-sibiu'
   },
   {
     id: 'alimentare',
     title: 'Alimentare Greșită',
-    description: 'Ajutor profesional în cazul alimentării cu combustibil nepotrivit. Golire rezervor pe loc.',
+    // TODO(confirmare operator): dacă se face golire de rezervor la fața locului.
+    description: 'Ați alimentat greșit? Nu porniți motorul. Sunați și vă spunem dacă mașina trebuie tractată la service.',
     icon: Fuel,
     href: '/depanare-auto-sibiu'
   }
@@ -53,11 +54,11 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-20">
           <h2 id="services-title" className="text-4xl md:text-6xl font-black mb-6 uppercase font-headline tracking-tighter text-white">
-            Servicii <span className="text-primary">Profesionale</span>
+            Tractări și <span className="text-primary">Asistență Rutieră</span>
           </h2>
           <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8" aria-hidden="true"></div>
           <p className="text-white/90 text-xl max-w-3xl mx-auto font-medium">
-            Oferim soluții complete de asistență rutieră și tractări auto cu echipamente moderne și personal calificat.
+            Tractări, transport pe platformă și ajutor la fața locului în Sibiu și pe A1. Ce putem face în situația dumneavoastră vă confirmăm la telefon.
           </p>
         </div>
 

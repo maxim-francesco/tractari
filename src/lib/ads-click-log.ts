@@ -44,9 +44,12 @@ export async function logAdsClick(record: AdsClickRecord): Promise<void> {
       )
     `;
   } catch (error) {
-    // Fail-silent design: never throw. Never log PII (IP, User Agent, Referer, click_id) in production.
+    // Fail-silent design: never throw. Never log PII (IP, User Agent, Referer, click_id) in production,
+    // but leave a data-free marker so failed writes are visible in the hosting logs.
     if (process.env.NODE_ENV !== 'production') {
       console.error('Error logging ads click to Neon:', error);
+    } else {
+      console.error('ads_click_log_failed', error instanceof Error ? error.name : 'unknown');
     }
   }
 }

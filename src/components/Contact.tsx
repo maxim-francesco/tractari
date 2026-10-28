@@ -14,7 +14,7 @@ export default function Contact() {
             Contactați-ne <span className="text-primary">Acum</span>
           </h2>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed font-medium">
-            Suntem disponibili non-stop în tot județul Sibiu și pe Autostrada A1. Apelați telefonic sau trimiteți un mesaj pe WhatsApp pentru asistență.
+            Suntem disponibili non-stop în tot județul Sibiu, pe Autostrada A1 și pe Valea Oltului. Apelați telefonic sau trimiteți un mesaj pe WhatsApp pentru asistență.
           </p>
         </div>
 
@@ -23,6 +23,7 @@ export default function Contact() {
           {/* Direct Phone Call Button */}
           <a
             href="tel:+40742916370"
+            data-cta="contact-section"
             className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 md:p-10 rounded-3xl bg-primary text-white shadow-2xl shadow-primary/20 hover:bg-primary/95 hover:scale-[1.02] active:scale-[0.99] transition-all group"
             aria-label="Sună acum la +40 742 916 370"
           >
@@ -45,6 +46,7 @@ export default function Contact() {
           {/* WhatsApp Direct Button */}
           <a
             href="https://wa.me/40742916370"
+            data-cta="contact-section"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 md:p-10 rounded-3xl bg-[#25D366]/10 border-2 border-[#25D366]/30 hover:border-[#25D366] hover:bg-[#25D366]/20 hover:scale-[1.02] active:scale-[0.99] transition-all group"
@@ -85,7 +87,7 @@ export default function Contact() {
             </div>
             <div>
               <p className="text-xs uppercase font-black tracking-widest text-white/60">Zonă deservită</p>
-              <p className="font-bold text-white text-base">Sibiu, Județ & Autostrada A1</p>
+              <p className="font-bold text-white text-base">Sibiu, Autostrada A1 & Valea Oltului</p>
             </div>
           </div>
         </div>

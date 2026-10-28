@@ -5,14 +5,13 @@ import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/politica-de-confidentialitate',
   title: 'Politică de Confidențialitate | Tractări Mașini Sibiu',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
+  noindex: true,
+});
 
 export default function PrivacyPolicyPage() {
   return (
@@ -29,7 +28,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="text-4xl md:text-5xl font-black font-headline mb-4 uppercase tracking-tighter">
             Politică de <span className="text-primary">Confidențialitate</span>
           </h1>
-          <p className="text-muted-foreground font-bold">Ultima actualizare: Februarie 2026</p>
+          <p className="text-muted-foreground font-bold">Ultima actualizare: Octombrie 2026</p>
         </div>
       </section>
 
@@ -46,7 +45,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">2. Ce date colectăm</h2>
               <p>
-                Colectăm datele pe care ni le furnizați direct atunci când solicitați serviciile noastre prin apel telefonic sau prin intermediul aplicației WhatsApp: nume, prenume și număr de telefon. Nu utilizăm formulare de contact pe acest website.
+                Colectăm datele pe care ni le furnizați direct atunci când solicitați serviciile noastre prin apel telefonic sau prin WhatsApp: nume, prenume, număr de telefon și locația vehiculului. Nu utilizăm formulare de contact pe acest website.
               </p>
             </div>
 
@@ -58,23 +57,31 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div>
-              <h2 className="text-white text-2xl font-black uppercase mb-4">4. Durata stocării</h2>
+              <h2 className="text-white text-2xl font-black uppercase mb-4">4. Date despre vizitele de pe website</h2>
               <p>
-                Datele dumneavoastră nu sunt stocate într-o bază de date electronică pe acest website. Comunicarea se desfășoară exclusiv prin canale de telefonie și mesagerie privată (WhatsApp).
+                <strong>Măsurare cu acordul dumneavoastră.</strong> Dacă acceptați cookie-urile de măsurare, folosim Google Analytics 4 și Google Ads (furnizor: Google) pentru statistici despre pagini și pentru a afla dacă vizitele venite din reclame duc la apăsări pe butonul de apel. Detalii în Politica cookies.
+              </p>
+              <p className="mt-4">
+                <strong>Jurnal pentru traficul din reclame.</strong> Când ajungeți pe site dintr-o reclamă Google, serverul înregistrează: identificatorul clicului din link (gclid, gbraid sau wbraid), adresa IP, tipul de browser și dispozitiv (user-agent), pagina de sosire, pagina de proveniență, țara, regiunea și orașul aproximate din IP și momentul vizitei.
+                Scopul este verificarea calității traficului plătit (de exemplu, clicuri repetate sau automate). Datele sunt păstrate într-o bază de date găzduită de un furnizor de servicii cloud și sunt accesibile doar operatorului.
+              </p>
+              {/* TODO(confirmare operator + verificare juridică): temeiul legal (interes legitim) și durata exactă de păstrare a jurnalului. */}
+              <p className="mt-4">
+                Păstrăm aceste date doar cât este necesar pentru verificarea traficului publicitar, apoi le ștergem.
               </p>
             </div>
 
             <div>
               <h2 className="text-white text-2xl font-black uppercase mb-4">5. Drepturile dumneavoastră</h2>
               <p>
-                Conform Regulamentului GDPR, beneficiați de dreptul de acces la date, dreptul de rectificare, dreptul de ștergere ("dreptul de a fi uitat"), dreptul la restricționarea prelucrării și dreptul de opoziție. Pentru exercitarea acestor drepturi, ne puteți contacta la numărul de telefon +40 742 916 370.
+                Conform Regulamentului GDPR, beneficiați de dreptul de acces la date, dreptul de rectificare, dreptul de ștergere („dreptul de a fi uitat”), dreptul la restricționarea prelucrării și dreptul de opoziție. Pentru exercitarea acestor drepturi, ne puteți contacta la numărul de telefon +40 742 916 370.
               </p>
             </div>
 
             <div>
-              <h2 className="text-white text-2xl font-black uppercase mb-4">6. Securitatea datelor</h2>
+              <h2 className="text-white text-2xl font-black uppercase mb-4">6. Destinatari și securitate</h2>
               <p>
-                Nu transferăm datele dumneavoastră către terți și nu utilizăm servicii de tracking, analytics sau profiling. Depunem toate eforturile pentru a asigura confidențialitatea comunicării noastre directe.
+                Nu vindem datele dumneavoastră. Datele despre vizite ajung la furnizorii tehnici menționați mai sus (Google pentru măsurare, furnizorul de găzduire și cel al bazei de date). Datele comunicate la telefon sau pe WhatsApp sunt folosite doar pentru intervenția solicitată.
               </p>
             </div>
           </div>
