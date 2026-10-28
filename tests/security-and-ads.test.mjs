@@ -44,17 +44,13 @@ test('Google Ads: parameter detection logic recognizes gclid, gbraid, and wbraid
   assert.equal(normalRes.hasAdClick, false);
 });
 
-// 2. Test IP & Country Resolution with Anti-Spoofing Protection (DNS-Only Mode)
-test('Proxy IP & Country: rejects forged CF headers in DNS-only mode when cf-ray is absent', () => {
-  const resolveIpAndCountry = (headers) => {
-    const hasCfRay = Boolean(headers['cf-ray']);
-    const cfConnectingIp = hasCfRay ? headers['cf-connecting-ip'] : null;
+// 2. Test Vercel-Managed IP & Country Resolution (DNS-Only Mode)
+test('Proxy IP & Country: strictly uses Vercel managed headers, ignoring unauthenticated CF headers', () => {
+  const resolveVercelIpAndCountry = (headers) => {
     const xForwardedFor = headers['x-forwarded-for'];
     let ip = 'unknown';
 
-    if (cfConnectingIp) {
-      ip = cfConnectingIp.trim();
-    } else if (xForwardedFor) {
+    if (xForwardedFor) {
       const parts = xForwardedFor.split(',');
       if (parts[0]) {
         ip = parts[0].trim();
@@ -66,43 +62,29 @@ test('Proxy IP & Country: rejects forged CF headers in DNS-only mode when cf-ray
       }
     }
 
-    const cfCountry = hasCfRay ? headers['cf-ipcountry'] : null;
-    const country = cfCountry || headers['x-vercel-ip-country'] || undefined;
-
+    const country = headers['x-vercel-ip-country'] || undefined;
     return { ip, country };
   };
 
-  // Case A: Attacker attempts to spoof CF-Connecting-IP directly to Vercel (DNS-Only, no cf-ray)
-  const spoofedAttempt = resolveIpAndCountry({
-    'cf-connecting-ip': '1.1.1.1',
-    'cf-ipcountry': 'US',
+  // Standard request hitting Vercel directly via Cloudflare DNS-Only
+  const vercelDirect = resolveVercelIpAndCountry({
     'x-forwarded-for': '86.120.10.20, 76.76.21.21',
     'x-real-ip': '86.120.10.20',
     'x-vercel-ip-country': 'RO',
+    // Injected by client but ignored by our proxy logic:
+    'cf-connecting-ip': '1.1.1.1',
+    'cf-ipcountry': 'US',
   });
-  // Must reject spoofed 1.1.1.1 and US; must pick real client IP and RO from Vercel!
-  assert.equal(spoofedAttempt.ip, '86.120.10.20');
-  assert.equal(spoofedAttempt.country, 'RO');
+  assert.equal(vercelDirect.ip, '86.120.10.20');
+  assert.equal(vercelDirect.country, 'RO');
 
-  // Case B: Legitimate proxied request through Cloudflare (has cf-ray)
-  const legitimateCfProxy = resolveIpAndCountry({
-    'cf-ray': '86e9abcdef123456-OTP',
-    'cf-connecting-ip': '86.120.10.20',
-    'cf-ipcountry': 'RO',
-    'x-forwarded-for': '86.120.10.20, 172.70.100.1',
-    'x-real-ip': '172.70.100.1',
-    'x-vercel-ip-country': 'DE',
-  });
-  assert.equal(legitimateCfProxy.ip, '86.120.10.20');
-  assert.equal(legitimateCfProxy.country, 'RO');
-
-  // Case C: Standard direct request to Vercel (no CF headers at all)
-  const directVercel = resolveIpAndCountry({
+  // Single IP in x-forwarded-for
+  const singleIp = resolveVercelIpAndCountry({
     'x-forwarded-for': '79.115.50.60',
     'x-vercel-ip-country': 'RO',
   });
-  assert.equal(directVercel.ip, '79.115.50.60');
-  assert.equal(directVercel.country, 'RO');
+  assert.equal(singleIp.ip, '79.115.50.60');
+  assert.equal(singleIp.country, 'RO');
 });
 
 // 3. Test Reporting Endpoint Authorization (Query Param vs Bearer Token vs X-API-Key)
@@ -193,8 +175,8 @@ test('WAF Rules: Probes filter catches malicious paths without triggering on leg
   }
 });
 
-// 5. Test Contact Info & Absolute Absence of Forms
-test('Contact Section: Preserves phone and WhatsApp, with ZERO form elements', async () => {
+// 5. Test Contact Section: Phone and WhatsApp preserved, ZERO forms, no unverified claims or fake email
+test('Contact Section: Preserves phone and WhatsApp, with ZERO forms, no unverified promises, no non-working email', async () => {
   const fs = await import('node:fs/promises');
   const contactCode = await fs.readFile('src/components/Contact.tsx', 'utf-8');
 
@@ -202,7 +184,6 @@ test('Contact Section: Preserves phone and WhatsApp, with ZERO form elements', a
   assert.equal(contactCode.includes('href="tel:+40742916370"'), true);
   assert.equal(contactCode.includes('href="https://wa.me/40742916370"'), true);
   assert.equal(contactCode.includes('+40 742 916 370'), true);
-  assert.equal(contactCode.includes('contact@tractarimasinisibiu.ro'), true);
 
   // Must NOT have any form elements
   assert.equal(contactCode.includes('<form'), false, 'Contact must not have <form');
@@ -210,5 +191,10 @@ test('Contact Section: Preserves phone and WhatsApp, with ZERO form elements', a
   assert.equal(contactCode.includes('<textarea'), false, 'Contact must not have <textarea');
   assert.equal(contactCode.includes('onSubmit'), false, 'Contact must not have onSubmit');
   assert.equal(contactCode.includes('handleSubmit'), false, 'Contact must not have handleSubmit');
-  assert.equal(contactCode.includes('TRIMITEȚI SOLICITAREA'), false, 'Contact must not have form submit button');
+
+  // Must NOT have unverified claims or non-working email
+  assert.equal(contactCode.includes('contact@tractarimasinisibiu.ro'), false, 'Non-working email must not be in Contact UI');
+  assert.equal(contactCode.includes('mailto:'), false, 'No mailto link since email does not receive messages');
+  assert.equal(contactCode.includes('20-30 min'), false, 'Must not claim 20-30 min guarantee');
+  assert.equal(contactCode.includes('Platformă autorizată'), false, 'Must not claim unverified platform authorization');
 });

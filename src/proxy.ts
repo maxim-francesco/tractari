@@ -66,15 +66,9 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
       const response = NextResponse.next();
 
       if (!isSameOriginDuplicate && !isCookieDuplicate) {
-        // Protect against client header spoofing when in DNS-only mode on Vercel:
-        // Only trust Cloudflare headers if cf-ray is present (indicating Cloudflare Edge was in the path).
-        const hasCfRay = Boolean(request.headers.get('cf-ray'));
-        const cfConnectingIp = hasCfRay ? request.headers.get('cf-connecting-ip') : null;
         const xForwardedFor = request.headers.get('x-forwarded-for');
         let ip = 'unknown';
-        if (cfConnectingIp) {
-          ip = cfConnectingIp.trim();
-        } else if (xForwardedFor) {
+        if (xForwardedFor) {
           const parts = xForwardedFor.split(',');
           if (parts[0]) {
             ip = parts[0].trim();
@@ -89,8 +83,7 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
         const user_agent = request.headers.get('user-agent') || undefined;
         const landing_path = pathname + search;
 
-        const cfCountry = hasCfRay ? request.headers.get('cf-ipcountry') : null;
-        const country = cfCountry || request.headers.get('x-vercel-ip-country') || undefined;
+        const country = request.headers.get('x-vercel-ip-country') || undefined;
         const region = request.headers.get('x-vercel-ip-country-region') || undefined;
 
         let city: string | undefined = undefined;
