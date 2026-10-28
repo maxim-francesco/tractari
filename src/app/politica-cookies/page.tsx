@@ -10,7 +10,7 @@ import { CookieSettingsButton } from '@/components/ConsentBanner';
 
 export const metadata: Metadata = pageMetadata({
   path: '/politica-cookies',
-  title: 'Politică Cookies | Tractări Mașini Sibiu',
+  title: 'Politică Cookies | RDL Tractări Auto Sibiu',
   noindex: true,
 });
 

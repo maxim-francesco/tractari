@@ -9,7 +9,7 @@ import { pageMetadata } from '@/lib/site';
 
 export const metadata: Metadata = pageMetadata({
   path: '/termeni-si-conditii',
-  title: 'Termeni și Condiții | Tractări Mașini Sibiu',
+  title: 'Termeni și Condiții | RDL Tractări Auto Sibiu',
   noindex: true,
 });
 

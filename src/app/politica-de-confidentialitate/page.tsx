@@ -9,7 +9,7 @@ import { pageMetadata } from '@/lib/site';
 
 export const metadata: Metadata = pageMetadata({
   path: '/politica-de-confidentialitate',
-  title: 'Politică de Confidențialitate | Tractări Mașini Sibiu',
+  title: 'Politică de Confidențialitate | RDL Tractări Auto Sibiu',
   noindex: true,
 });
 

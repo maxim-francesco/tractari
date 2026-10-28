@@ -50,7 +50,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
     a: "Da. Pe Valea Oltului (DN7) și pe A1 în zona Sibiu, spuneți-ne la telefon sensul de mers și cea mai apropiată localitate, bornă sau ieșire. Pe autostradă și pe DN7, mașina se încarcă pe platformă și se duce la service sau la adresa indicată."
   },
   {
-    q: "Cine operează serviciul Tractări Mașini Sibiu?",
+    q: "Cine operează RDL Tractări Auto Sibiu?",
     a: "Serviciul este operat de PISALTU MIHAI-ILIE P.F.A., CUI 53773945, Nr. Reg. Com. F02/600/570007, județul Sibiu."
   },
 ];

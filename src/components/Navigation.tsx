@@ -23,13 +23,13 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border" aria-label="Navigare principală">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group" aria-label="Tractări Sibiu - Pagina principală">
+        <Link href="/" className="flex items-center gap-2 group" aria-label="RDL Tractări Auto Sibiu - Pagina principală">
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-300">
             <span className="text-white font-bold text-xl">T</span>
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-primary font-bold tracking-tight text-lg uppercase">TRACTĂRI SIBIU</span>
-            <span className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Profesional 24/7</span>
+            <span className="text-primary font-bold tracking-tight text-lg uppercase">RDL TRACTĂRI</span>
+            <span className="text-white/80 text-[10px] font-bold uppercase tracking-widest">Auto Sibiu · Non-stop</span>
           </div>
         </Link>
 

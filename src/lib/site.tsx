@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 // Single source for the public origin. Live: apex and http redirect here.
 export const SITE_HOST = 'www.tractarimasinisibiu.ro';
 export const SITE_URL = `https://${SITE_HOST}`;
-export const SITE_NAME = 'Tractări Mașini Sibiu';
+export const SITE_NAME = 'RDL Tractări Auto Sibiu';
 
 export const CONSENT_COOKIE = 'cookie_consent';
 

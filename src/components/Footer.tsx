@@ -17,7 +17,7 @@ export default function Footer() {
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
                 <span className="text-white font-bold text-xl uppercase">T</span>
               </div>
-              <span className="text-primary font-bold tracking-tight text-xl uppercase">TRACTĂRI SIBIU</span>
+              <span className="text-primary font-bold tracking-tight text-xl uppercase">RDL TRACTĂRI AUTO SIBIU</span>
             </Link>
             <p className="text-muted-foreground leading-relaxed mb-8 font-medium">
               Tractări auto și asistență rutieră în Sibiu, împrejurimi și pe A1. Preluăm apeluri non-stop.

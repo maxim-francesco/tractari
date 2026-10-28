@@ -59,7 +59,7 @@ export async function renderOgImage(key: string) {
             >
               T
             </div>
-            <div style={{ fontSize: 34, fontFamily: 'InterBold', fontWeight: 800, color: '#FF6B00', letterSpacing: 1 }}>TRACTĂRI MAȘINI SIBIU</div>
+            <div style={{ fontSize: 34, fontFamily: 'InterBold', fontWeight: 800, color: '#FF6B00', letterSpacing: 1 }}>RDL TRACTĂRI AUTO SIBIU</div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -9,7 +9,7 @@ import { pageMetadata } from '@/lib/site';
 
 export const metadata: Metadata = pageMetadata({
   path: '/anpc',
-  title: 'ANPC | Tractări Mașini Sibiu',
+  title: 'ANPC | RDL Tractări Auto Sibiu',
   noindex: true,
 });
 
