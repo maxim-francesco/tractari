@@ -20,7 +20,7 @@ export default function Footer() {
               <span className="text-primary font-bold tracking-tight text-xl uppercase">RDL TRACTĂRI AUTO SIBIU</span>
             </Link>
             <p className="text-muted-foreground leading-relaxed mb-8 font-medium">
-              Tractări auto și asistență rutieră în Sibiu, împrejurimi și pe A1. Preluăm apeluri non-stop.
+              RDL Tractări Auto Sibiu: tractări auto și asistență rutieră în Sibiu, împrejurimi, pe A1 și pe Valea Oltului. Preluăm apeluri non-stop.
             </p>
             <div className="space-y-4">
               <a href={PHONE_HREF} data-cta="footer" className="flex items-center gap-3 text-white hover:text-primary transition-colors font-black text-lg tracking-tight">
@@ -80,8 +80,21 @@ export default function Footer() {
           <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground text-center md:text-left">
             © {currentYear} {LEGAL_NAME} Toate drepturile rezervate.
           </p>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
-            Construit și proiectat de Francesco Maxim | +40758990675
+          <div className="flex flex-col items-center md:items-end gap-1.5 text-center md:text-right">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 flex items-center gap-2">
+              Construit și proiectat de Francesco Maxim | +40758990675
+            </div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+              Optimizat SEO de{' '}
+              <a
+                href="https://www.diacovidiu.ro"
+                target="_blank"
+                rel="noopener"
+                className="text-muted-foreground/80 underline-offset-4 hover:text-primary hover:underline transition-colors"
+              >
+                Diac Ovidiu
+              </a>
+            </p>
           </div>
         </div>
       </div>

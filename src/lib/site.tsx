@@ -28,7 +28,8 @@ export const REVIEW_URL: string | null = null;
 // Focus: județul Sibiu, Autostrada A1 (zona Sibiu) și Valea Oltului (DN7).
 export const AREA_SERVED = [
   'Sibiu', 'Șelimbăr', 'Cisnădie', 'Rășinari', 'Cristian', 'Săliște', 'Avrig', 'Tălmaciu',
-  'Boița', 'Ocna Sibiului', 'Mediaș', 'Agnita', 'Dumbrăveni', 'Păltiniș',
+  'Boița', 'Ocna Sibiului', 'Miercurea Sibiului', 'Slimnic', 'Mediaș', 'Agnita', 'Dumbrăveni', 'Păltiniș',
+  'Râmnicu Vâlcea', 'Călimănești', 'Căciulata', 'Brezoi',
 ];
 
 // One form everywhere (canonical, og:url, sitemap, schema): no trailing slash,
