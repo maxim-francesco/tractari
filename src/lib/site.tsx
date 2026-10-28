@@ -14,6 +14,8 @@ export const PHONE_E164 = '+40742916370';
 export const PHONE_DISPLAY = '+40 742 916 370';
 export const PHONE_HREF = `tel:${PHONE_E164}`;
 export const WHATSAPP_URL = 'https://wa.me/40742916370';
+// Profilul verificat „RDL Tractări Auto Sibiu” din Google Business Profile (CID).
+export const GOOGLE_MAPS_URL = 'https://maps.google.com/?cid=11914490510479750594';
 
 export const LEGAL_NAME = 'PISALTU MIHAI-ILIE P.F.A.';
 export const CUI = '53773945';

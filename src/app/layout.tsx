@@ -4,7 +4,7 @@ import './globals.css';
 import CallClickTracker from '@/components/CallClickTracker';
 import ConsentBanner from '@/components/ConsentBanner';
 import {
-  AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, JsonLd, LEGAL_NAME, PHONE_E164, SITE_HOST,
+  AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, GOOGLE_MAPS_URL, JsonLd, LEGAL_NAME, PHONE_E164, SITE_HOST,
   SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
 } from '@/lib/site';
 
@@ -85,6 +85,8 @@ const siteGraph = {
       taxID: CUI,
       url: absoluteUrl('/'),
       telephone: PHONE_E164,
+      hasMap: GOOGLE_MAPS_URL,
+      sameAs: [GOOGLE_MAPS_URL],
       address: {
         '@type': 'PostalAddress',
         addressRegion: 'Sibiu',
