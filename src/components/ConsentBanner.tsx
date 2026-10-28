@@ -79,14 +79,14 @@ export default function ConsentBanner() {
     emit();
   };
 
-  // Mobile: compact strip under the header so it never covers the call buttons
-  // (hero CTA mid-screen, sticky call button bottom-right). Desktop: bottom-left card.
+  // Mobile: compact card at the bottom, leaving room on the right for the sticky call
+  // button (right-6 + w-16 + outline ≈ 5.75rem). Desktop: bottom-left card.
   return (
     <div
       role="dialog"
       aria-modal="false"
       aria-labelledby="consent-title"
-      className="fixed top-[4.5rem] left-3 right-3 z-[90] rounded-2xl border border-white/20 bg-[#141414] p-3 shadow-2xl md:top-auto md:bottom-6 md:left-6 md:right-auto md:max-w-md md:p-6"
+      className="fixed bottom-3 left-3 right-[5.75rem] z-[90] rounded-2xl border border-white/20 bg-[#141414] p-3 shadow-2xl md:bottom-6 md:left-6 md:right-auto md:max-w-md md:p-6"
     >
       <p id="consent-title" className="sr-only md:not-sr-only md:mb-1 md:block md:text-sm md:font-black md:uppercase md:tracking-widest md:text-white">Cookie-uri</p>
       <p className="mb-3 text-sm leading-snug text-white/85 md:mb-4 md:leading-relaxed">
