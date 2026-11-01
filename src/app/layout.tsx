@@ -3,12 +3,16 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import CallClickTracker from '@/components/CallClickTracker';
 import ConsentBanner from '@/components/ConsentBanner';
+import ForwardingNumber from '@/components/ForwardingNumber';
 import {
-  AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, GOOGLE_MAPS_URL, JsonLd, LEGAL_NAME, PHONE_E164, SITE_HOST,
-  SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
+  AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, GOOGLE_MAPS_URL, JsonLd, LEGAL_NAME, PHONE_DISPLAY, PHONE_E164,
+  SITE_HOST, SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
 } from '@/lib/site';
 
 const GA_MEASUREMENT_ID = 'G-XYEP1TJYMQ';
+// Google Ads „Apel de pe site (număr Google)”. AW-18256093286 itself already loads
+// through the GA4 Google tag, so only the website-call config is added here.
+const ADS_WEBSITE_CALL = 'AW-18256093286/q1RQCKjGkrAdEObAl4FE';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -69,6 +73,14 @@ try {
 if (location.hostname === '${SITE_HOST}') {
   gtag('js', new Date());
   gtag('config', '${GA_MEASUREMENT_ID}');
+  // Google swaps in a forwarding number for ad visitors; ForwardingNumber puts it on the page.
+  gtag('config', '${ADS_WEBSITE_CALL}', {
+    phone_conversion_number: '${PHONE_DISPLAY}',
+    phone_conversion_callback: function (formatted, mobile) {
+      window.__gfn = { display: formatted, dial: mobile || formatted };
+      window.dispatchEvent(new Event('gfn'));
+    }
+  });
 }
 `;
 
@@ -134,6 +146,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased bg-background text-foreground selection:bg-primary selection:text-white">
         <CallClickTracker />
+        <ForwardingNumber />
         {children}
         <ConsentBanner />
       </body>
