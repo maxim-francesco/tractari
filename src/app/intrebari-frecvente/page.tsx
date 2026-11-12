@@ -63,6 +63,10 @@ export default function FAQPage() {
             ))}
           </div>
 
+          <p className="mt-16 text-muted-foreground text-lg leading-relaxed">
+            Vedeți și <Link href="/blog/cum-alegi-un-serviciu-de-tractare-de-incredere" className="text-primary font-bold">cum alegeți un serviciu de tractare de încredere în Sibiu</Link>.
+          </p>
+
           <div className="mt-24 p-12 rounded-[3rem] bg-primary text-white text-center shadow-2xl shadow-primary/30">
             <h2 className="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tight">Mai aveți întrebări?</h2>
             <p className="text-xl mb-10 opacity-90 font-medium">Preluăm apeluri non-stop.</p>

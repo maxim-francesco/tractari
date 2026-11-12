@@ -86,6 +86,9 @@ export default function AsistentaRutieraPage() {
               <li>Pe autostradă, ieșiți prin dreapta și așteptați în spatele parapetului, nu lângă mașină.</li>
               <li>Sunați la <strong>{PHONE_DISPLAY}</strong> și spuneți locația exactă, ce vehicul aveți și ce s-a întâmplat.</li>
             </ol>
+            <p className="mt-5">
+              Ați alimentat greșit? Vedeți și <Link href="/blog/alimentare-gresita-ce-sa-faci" className="text-primary font-bold">ce faceți după o alimentare greșită</Link>.
+            </p>
           </div>
 
           <div className="pt-10 border-t border-border flex flex-col md:flex-row justify-center items-center gap-8">
