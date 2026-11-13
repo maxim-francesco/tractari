@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
 import { timingSafeEqual } from 'node:crypto';
-import { googleNetworkLabel, parseIpList, parseMinClicks, toCsv } from '@/lib/ads-report';
+import { googleNetworkLabel, parseIpList, parseMinClicks, summarizeSignatures, toCsv, type ClickRow } from '@/lib/ads-report';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,6 +12,8 @@ const DEFAULT_DAYS = 7;
 const MAX_DAYS = 400;
 // The CSV export is the evidence file for a Google invalid-traffic investigation request.
 const CSV_MAX_ROWS = 5000;
+const SIGNATURE_MAX_ROWS = 20000;
+const HOME_COUNTRY = 'RO';
 const CSV_COLUMNS = [
   'ts_utc', 'ts_local', 'click_id', 'click_id_type', 'ip', 'user_agent', 'landing_path', 'referer', 'country', 'region', 'city',
 ];
@@ -30,7 +32,8 @@ function safeEqual(a: string, b: string): boolean {
 }
 
 // Query parameters: from / to (YYYY-MM-DD, Europe/Bucharest, inclusive), min_clicks (default 3),
-// format=csv (all logged requests of the repeat clickers), ip=a,b (CSV for these IPs instead).
+// format=csv (all logged requests of the repeat clickers), ip=a,b (CSV for these IPs instead),
+// format=csv&group=signature (all logged requests of the flagged browser signatures).
 // Accepted credentials: `?key=`, `Authorization: Bearer <key>`, `X-API-Key: <key>`, or
 // HTTP Basic (any user name, password = ADS_REPORT_KEY; the browser prompts, no secret in the URL).
 function providedKey(request: NextRequest): string | null {
@@ -122,6 +125,40 @@ export async function GET(request: NextRequest) {
     }));
     const repeatClickers = repeatAll.filter((row) => !row.google_network);
     const googleNetworkIps = repeatAll.filter((row) => row.google_network);
+
+    // Same browser signature on many IPs (VPN pattern); grouping by IP does not show it.
+    const signatureRows = (await sql`
+      SELECT ts, click_id, ip, user_agent, country
+      FROM ads_clicks
+      WHERE ${where}
+      ORDER BY ts
+      LIMIT ${SIGNATURE_MAX_ROWS}
+    `) as ClickRow[];
+    const signatures = summarizeSignatures(signatureRows, { homeCountry: HOME_COUNTRY, minClicks });
+    const flaggedSignatures = signatures.filter((signature) => signature.flags.length > 0);
+
+    // format=csv&group=signature: every logged request of the flagged browser signatures.
+    if (request.nextUrl.searchParams.get('format') === 'csv' && request.nextUrl.searchParams.get('group') === 'signature') {
+      const userAgents = flaggedSignatures.map((signature) => signature.user_agent);
+      const rows = userAgents.length === 0 ? [] : await sql`
+        SELECT
+          to_char(ts AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS ts_utc,
+          to_char(ts AT TIME ZONE ${TIME_ZONE}, 'YYYY-MM-DD HH24:MI:SS') AS ts_local,
+          click_id, click_id_type, ip, user_agent, landing_path, referer, country, region, city
+        FROM ads_clicks
+        WHERE ${where} AND user_agent = ANY(${userAgents})
+        ORDER BY ts
+        LIMIT ${CSV_MAX_ROWS}
+      `;
+      const withoutGoogle = rows.filter((row) => !googleNetworkLabel(String(row.ip)));
+      return new NextResponse(toCsv(CSV_COLUMNS, withoutGoogle), {
+        headers: {
+          'Content-Type': 'text/csv; charset=utf-8',
+          'Content-Disposition': `attachment; filename="ads-clicks-signature-${from}-${to}.csv"`,
+          'Cache-Control': 'no-store',
+        },
+      });
+    }
 
     // format=csv: every logged request of the repeat clickers (or of the IPs in `ip=a,b`).
     if (request.nextUrl.searchParams.get('format') === 'csv') {
@@ -228,6 +265,12 @@ export async function GET(request: NextRequest) {
         note: 'logged_requests = landing requests with an ad click id, deduplicated per browser for 30 min. Not billed clicks, sessions or people. Compare with Google Ads click and invalid-click reports for the same dates and account time zone.',
         totals,
         by_day: byDay,
+        browser_signatures: {
+          note: 'One entry per exact user agent, Google networks excluded. Flagged = spread over 3+ IPs and either requests from outside the home country or bursts. A common phone browser is shared by many real visitors, so read the flags, not the size. Add format=csv&group=signature for the evidence file.',
+          home_country: HOME_COUNTRY,
+          flagged: flaggedSignatures,
+          others: signatures.filter((signature) => signature.flags.length === 0).slice(0, 15),
+        },
         by_hour_local: byHour,
         by_ip: byIp,
         repeat_clickers: {
