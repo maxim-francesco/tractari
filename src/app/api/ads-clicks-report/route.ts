@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
 import { timingSafeEqual } from 'node:crypto';
+import { googleNetworkLabel, parseIpList, parseMinClicks, toCsv } from '@/lib/ads-report';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,6 +10,11 @@ export const dynamic = 'force-dynamic';
 const TIME_ZONE = 'Europe/Bucharest';
 const DEFAULT_DAYS = 7;
 const MAX_DAYS = 400;
+// The CSV export is the evidence file for a Google invalid-traffic investigation request.
+const CSV_MAX_ROWS = 5000;
+const CSV_COLUMNS = [
+  'ts_utc', 'ts_local', 'click_id', 'click_id_type', 'ip', 'user_agent', 'landing_path', 'referer', 'country', 'region', 'city',
+];
 
 function unauthorized() {
   return NextResponse.json(
@@ -23,6 +29,8 @@ function safeEqual(a: string, b: string): boolean {
   return ab.length === bb.length && timingSafeEqual(ab, bb);
 }
 
+// Query parameters: from / to (YYYY-MM-DD, Europe/Bucharest, inclusive), min_clicks (default 3),
+// format=csv (all logged requests of the repeat clickers), ip=a,b (CSV for these IPs instead).
 // Accepted credentials: `?key=`, `Authorization: Bearer <key>`, `X-API-Key: <key>`, or
 // HTTP Basic (any user name, password = ADS_REPORT_KEY; the browser prompts, no secret in the URL).
 function providedKey(request: NextRequest): string | null {
@@ -84,6 +92,59 @@ export async function GET(request: NextRequest) {
     // Local-date bounds converted to timestamps in the business time zone.
     const where = sql`ts >= (${from}::date)::timestamp AT TIME ZONE ${TIME_ZONE}
       AND ts < ((${to}::date + 1)::timestamp AT TIME ZONE ${TIME_ZONE})`;
+
+    const minClicks = parseMinClicks(request.nextUrl.searchParams.get('min_clicks'));
+
+    // One IP with several distinct ad click ids in the range. Google's own networks are
+    // labelled and left out of the suspect list; an IP is a subscriber line, not a person.
+    const repeatRows = await sql`
+      SELECT
+        ip,
+        COUNT(*)::int AS logged_requests,
+        COUNT(DISTINCT click_id)::int AS distinct_click_ids,
+        COUNT(DISTINCT (ts AT TIME ZONE ${TIME_ZONE})::date)::int AS active_days,
+        MIN(ts) AS first_ts,
+        MAX(ts) AS last_ts,
+        COUNT(DISTINCT user_agent)::int AS distinct_user_agents,
+        string_agg(DISTINCT COALESCE(city, 'unknown'), ', ') AS cities,
+        string_agg(DISTINCT COALESCE(country, 'unknown'), ', ') AS countries
+      FROM ads_clicks
+      WHERE ${where}
+      GROUP BY ip
+      HAVING COUNT(DISTINCT click_id) >= ${minClicks}
+      ORDER BY distinct_click_ids DESC, logged_requests DESC
+      LIMIT 200
+    `;
+    const repeatAll = repeatRows.map((row) => ({
+      ...(row as Record<string, unknown>),
+      ip: String(row.ip),
+      google_network: googleNetworkLabel(String(row.ip)),
+    }));
+    const repeatClickers = repeatAll.filter((row) => !row.google_network);
+    const googleNetworkIps = repeatAll.filter((row) => row.google_network);
+
+    // format=csv: every logged request of the repeat clickers (or of the IPs in `ip=a,b`).
+    if (request.nextUrl.searchParams.get('format') === 'csv') {
+      const requested = parseIpList(request.nextUrl.searchParams.get('ip'));
+      const ips = requested.length > 0 ? requested : repeatClickers.map((row) => row.ip);
+      const rows = ips.length === 0 ? [] : await sql`
+        SELECT
+          to_char(ts AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS"Z"') AS ts_utc,
+          to_char(ts AT TIME ZONE ${TIME_ZONE}, 'YYYY-MM-DD HH24:MI:SS') AS ts_local,
+          click_id, click_id_type, ip, user_agent, landing_path, referer, country, region, city
+        FROM ads_clicks
+        WHERE ${where} AND ip = ANY(${ips})
+        ORDER BY ip, ts
+        LIMIT ${CSV_MAX_ROWS}
+      `;
+      return new NextResponse(toCsv(CSV_COLUMNS, rows), {
+        headers: {
+          'Content-Type': 'text/csv; charset=utf-8',
+          'Content-Disposition': `attachment; filename="ads-clicks-${from}-${to}.csv"`,
+          'Cache-Control': 'no-store',
+        },
+      });
+    }
 
     const [totals] = await sql`
       SELECT
@@ -169,6 +230,12 @@ export async function GET(request: NextRequest) {
         by_day: byDay,
         by_hour_local: byHour,
         by_ip: byIp,
+        repeat_clickers: {
+          min_distinct_click_ids: minClicks,
+          note: 'IPs with at least min_distinct_click_ids ad click ids in the range, Google networks excluded. One IP is a subscriber line and can be several people. Add format=csv for the evidence file.',
+          suspects: repeatClickers,
+          google_networks: googleNetworkIps,
+        },
         by_country_region: byCountry,
         by_click_id_type: byClickIdType,
         last_100: last100,
