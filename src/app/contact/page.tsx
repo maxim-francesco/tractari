@@ -4,7 +4,9 @@ import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { Phone, Clock, MapPin, Truck, Shield, CheckCircle2, MessageCircle } from 'lucide-react';
-import { AREA_SERVED, JsonLd, PHONE_DISPLAY, PHONE_HREF, WHATSAPP_URL, breadcrumbJsonLd, pageMetadata, whatsappUrl } from '@/lib/site';
+import {
+  AREA_SERVED, BUSINESS_ID, JsonLd, PHONE_DISPLAY, PHONE_HREF, WEBSITE_ID, WHATSAPP_URL, absoluteUrl, breadcrumbJsonLd, pageMetadata, whatsappUrl,
+} from '@/lib/site';
 
 const PATH = '/contact';
 
@@ -21,6 +23,17 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        '@id': `${absoluteUrl(PATH)}#webpage`,
+        url: absoluteUrl(PATH),
+        name: 'Contact RDL Tractări Auto Sibiu',
+        inLanguage: 'ro-RO',
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': BUSINESS_ID },
+        mainEntity: { '@id': BUSINESS_ID },
+      }} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Contact', path: PATH }])} />
 
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/20 to-background">

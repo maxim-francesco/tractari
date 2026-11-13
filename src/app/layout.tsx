@@ -6,13 +6,19 @@ import ConsentBanner from '@/components/ConsentBanner';
 import ForwardingNumber from '@/components/ForwardingNumber';
 import {
   AREA_SERVED, BUSINESS_ID, CONSENT_COOKIE, CUI, GOOGLE_MAPS_URL, JsonLd, LEGAL_NAME, PHONE_DISPLAY, PHONE_E164,
-  SITE_HOST, SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
+  SERVICE_PATHS, SITE_HOST, SITE_NAME, SITE_URL, WEBSITE_ID, absoluteUrl, ogImageUrl,
 } from '@/lib/site';
 
 const GA_MEASUREMENT_ID = 'G-XYEP1TJYMQ';
 // Google Ads „Apel de pe site (număr Google)”. AW-18256093286 itself already loads
 // through the GA4 Google tag, so only the website-call config is added here.
 const ADS_WEBSITE_CALL = 'AW-18256093286/q1RQCKjGkrAdEObAl4FE';
+
+// Hosts of AI assistants that send visitors (as referrer or utm_source), escaped for a RegExp.
+const AI_REFERRERS = [
+  'chatgpt.com', 'chat.openai.com', 'perplexity.ai', 'claude.ai', 'gemini.google.com',
+  'copilot.microsoft.com', 'chat.mistral.ai', 'chat.deepseek.com', 'grok.com', 'meta.ai', 'you.com',
+].map((host) => host.replace(/\./g, '\\.')).join('|');
 
 const inter = Inter({
   subsets: ['latin'],
@@ -81,6 +87,13 @@ if (location.hostname === '${SITE_HOST}') {
       window.dispatchEvent(new Event('gfn'));
     }
   });
+  // Visits that arrive from an AI assistant get their own GA4 event (ai_referral),
+  // so AI traffic and its calls can be reported separately from other referrals.
+  try {
+    var aiRef = (document.referrer.match(/^https?:\\/\\/(?:[a-z0-9-]+\\.)*(${AI_REFERRERS})(?:\\/|$)/i) || [])[1]
+      || (location.search.match(/[?&]utm_source=(${AI_REFERRERS})(?:&|$)/i) || [])[1];
+    if (aiRef) gtag('event', 'ai_referral', { ai_source: aiRef.toLowerCase() });
+  } catch (e) {}
 }
 `;
 
@@ -95,7 +108,10 @@ const siteGraph = {
       name: SITE_NAME,
       legalName: LEGAL_NAME,
       taxID: CUI,
+      description: 'Tractări auto pe platformă și asistență rutieră pentru autoturisme și dube în Sibiu, în județul Sibiu, pe Autostrada A1 în zona Sibiu și pe Valea Oltului (DN7). Apeluri preluate non-stop.',
       url: absoluteUrl('/'),
+      logo: absoluteUrl('/icon'),
+      image: ogImageUrl('/'),
       telephone: PHONE_E164,
       hasMap: GOOGLE_MAPS_URL,
       sameAs: [GOOGLE_MAPS_URL],
@@ -116,6 +132,21 @@ const siteGraph = {
         telephone: PHONE_E164,
         contactType: 'customer service',
         availableLanguage: 'ro',
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '00:00',
+          closes: '23:59',
+        },
+      },
+      // Links the business to the Service entities declared on each service page.
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Servicii de tractări și asistență rutieră',
+        itemListElement: SERVICE_PATHS.map((path) => ({
+          '@type': 'Offer',
+          itemOffered: { '@id': `${absoluteUrl(path)}#service` },
+        })),
       },
     },
     {

@@ -25,7 +25,6 @@ export default function Contact() {
             href="tel:+40742916370"
             data-cta="contact-section"
             className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 md:p-10 rounded-3xl bg-primary text-white shadow-2xl shadow-primary/20 hover:bg-primary/95 hover:scale-[1.02] active:scale-[0.99] transition-all group"
-            aria-label="Sună acum la +40 742 916 370"
           >
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <Phone className="w-8 h-8 text-white" aria-hidden="true" />
@@ -50,7 +49,6 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-8 md:p-10 rounded-3xl bg-[#25D366]/10 border-2 border-[#25D366]/30 hover:border-[#25D366] hover:bg-[#25D366]/20 hover:scale-[1.02] active:scale-[0.99] transition-all group"
-            aria-label="Trimite mesaj pe WhatsApp la +40 742 916 370"
           >
             <div className="w-16 h-16 rounded-2xl bg-[#25D366] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-[#25D366]/20">
               <MessageCircle className="w-8 h-8 text-white" aria-hidden="true" />

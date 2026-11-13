@@ -21,6 +21,14 @@ export const LEGAL_NAME = 'PISALTU MIHAI-ILIE P.F.A.';
 export const CUI = '53773945';
 export const REG_COM = 'F02/600/570007';
 
+// Service pages; each one declares a Service entity with the @id `<url>#service`.
+export const SERVICE_PATHS = [
+  '/tractari-auto-sibiu',
+  '/asistenta-rutiera-sibiu',
+  '/depanare-auto-sibiu',
+  '/transport-auto-sibiu',
+];
+
 // TODO(confirmare operator): link real „Scrie o recenzie” din Google Business Profile.
 // Cât timp e null, secțiunea de recenzii nu se afișează.
 export const REVIEW_URL: string | null = null;
@@ -50,6 +58,7 @@ type PageMetadataInput = {
   noindex?: boolean;
   openGraphType?: 'website' | 'article';
   publishedTime?: string;
+  modifiedTime?: string;
 };
 
 // Share image per page, prerendered by app/og/[key] (keys listed in lib/og.tsx).
@@ -59,7 +68,7 @@ export function ogImageUrl(path: string): string {
 }
 
 // Self-canonical + og:url for indexable pages; noindex pages get neither.
-export function pageMetadata({ path, title, description, noindex, openGraphType = 'website', publishedTime }: PageMetadataInput): Metadata {
+export function pageMetadata({ path, title, description, noindex, openGraphType = 'website', publishedTime, modifiedTime }: PageMetadataInput): Metadata {
   if (noindex) {
     return {
       title,
@@ -82,7 +91,7 @@ export function pageMetadata({ path, title, description, noindex, openGraphType 
       locale: 'ro_RO',
       type: openGraphType,
       images: [image],
-      ...(openGraphType === 'article' && publishedTime ? { publishedTime } : {}),
+      ...(openGraphType === 'article' && publishedTime ? { publishedTime, modifiedTime: modifiedTime ?? publishedTime } : {}),
     },
     twitter: {
       card: 'summary_large_image',

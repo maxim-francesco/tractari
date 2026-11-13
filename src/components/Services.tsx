@@ -65,7 +65,7 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => {
             return (
-              <Link key={service.id} href={service.href} className="group" aria-label={`Află mai multe despre ${service.title}`}>
+              <Link key={service.id} href={service.href} className="group">
                 <Card className="h-full overflow-hidden border border-border bg-secondary/20 hover:border-primary/50 hover:bg-secondary/40 transition-all duration-300 rounded-3xl">
                   <div className="p-8 pb-0">
                     <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 group-hover:bg-primary transition-all duration-300 shadow-xl group-hover:shadow-primary/20">

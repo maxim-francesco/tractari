@@ -29,7 +29,7 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-6 mb-16">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black h-auto min-h-16 py-3 whitespace-normal max-w-full px-6 sm:px-10 text-xl rounded-2xl shadow-[0_0_30px_rgba(255,107,0,0.3)] group" asChild>
-              <a href={PHONE_HREF} data-cta="hero" aria-label={`Sună acum la ${PHONE_DISPLAY}`}>
+              <a href={PHONE_HREF} data-cta="hero">
                 <Phone className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform" aria-hidden="true" />
                 SUNĂ ACUM: {PHONE_DISPLAY}
               </a>

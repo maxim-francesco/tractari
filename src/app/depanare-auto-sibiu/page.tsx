@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Zap, Battery, Settings, Fuel, Phone, HelpCircle } from 'lucide-react';
 import FaqList from '@/components/FaqList';
 import Link from 'next/link';
-import { JsonLd, PHONE_HREF, breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from '@/lib/site';
+import { JsonLd, PHONE_DISPLAY, PHONE_HREF, breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from '@/lib/site';
 
 const PATH = '/depanare-auto-sibiu';
 
@@ -81,9 +81,56 @@ export default function DepanareAutoPage() {
             </div>
             <div className="relative aspect-video rounded-3xl overflow-hidden border border-border bg-secondary/20 flex items-center justify-center">
               <div className="text-center p-10">
-                <h3 className="text-2xl font-black text-primary mb-2 uppercase">Non-Stop</h3>
+                <p className="text-2xl font-black text-primary mb-2 uppercase">Non-Stop</p>
                 <p className="text-muted-foreground">Preluăm apeluri non-stop pentru Sibiu, împrejurimi și A1.</p>
               </div>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-24 space-y-12 text-muted-foreground text-lg leading-relaxed">
+            <div>
+              <h2 className="text-3xl font-bold mb-5 text-white uppercase font-headline">Depanare pe loc sau tractare?</h2>
+              <p>
+                Depanarea auto înseamnă rezolvarea problemei acolo unde a rămas mașina. Tractarea înseamnă încărcarea ei pe platformă și transportul la service.
+                Ce variantă se potrivește depinde de defecțiune și de locul în care vă aflați; vă spunem la telefon, înainte să plecăm spre dumneavoastră.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3 text-white uppercase">Baterie descărcată</h3>
+              <p>
+                Semnele obișnuite: demarorul se învârte greu sau deloc, iar luminile din bord pâlpâie ori se sting la pornire. Spuneți-ne unde este mașina și ce model aveți.
+                Dacă mașina nu pornește nici cu ajutor, o ducem pe platformă la service sau acasă.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3 text-white uppercase">Pană de cauciuc</h3>
+              <p>
+                Spuneți-ne dacă aveți roată de rezervă, cric și cheie de roți. Fără roată de rezervă, cu două roți sparte sau cu janta deteriorată, mașina se duce pe platformă la vulcanizare.
+                Nu mergeți pe roata dezumflată: se distruge anvelopa și se poate deteriora janta.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3 text-white uppercase">Alimentare greșită</h3>
+              <p>
+                Nu porniți motorul și nu puneți contactul. Detalii în articolul{' '}
+                <Link href="/blog/alimentare-gresita-ce-sa-faci" className="text-primary font-bold underline underline-offset-4">ce faceți după o alimentare greșită</Link>.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3 text-white uppercase">Mașina nu pornește și nu știți de ce</h3>
+              <p>
+                Dacă nu este bateria, cauza se stabilește de obicei la service. În acest caz vă ajută o{' '}
+                <Link href="/tractari-auto-sibiu" className="text-primary font-bold underline underline-offset-4">tractare pe platformă în Sibiu</Link> până la service-ul ales de dumneavoastră.
+              </p>
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold mb-5 text-white uppercase font-headline">Ce ne spuneți când sunați</h2>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Unde este mașina: adresă, reper sau, pe drum, sensul de mers și cea mai apropiată localitate.</li>
+                <li>Marca și modelul și dacă este autoturism sau dubă.</li>
+                <li>Ce s-a întâmplat și ce ați încercat deja.</li>
+              </ul>
+              <p className="mt-5">Telefon non-stop: <strong>{PHONE_DISPLAY}</strong>.</p>
             </div>
           </div>
 

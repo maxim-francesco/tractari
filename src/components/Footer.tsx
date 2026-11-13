@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6 group">
               <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform">
-                <span className="text-white font-bold text-xl uppercase">T</span>
+                <span className="text-white font-bold text-xl uppercase" aria-hidden="true">T</span>
               </div>
               <span className="text-primary font-bold tracking-tight text-xl uppercase">RDL TRACTĂRI AUTO SIBIU</span>
             </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
 
           {/* Column 2 - Services: every page links to the money pages with descriptive anchors */}
           <nav aria-label="Servicii">
-            <h4 className="font-black text-white uppercase tracking-widest text-sm mb-8">Servicii</h4>
+            <h2 className="font-black text-white uppercase tracking-widest text-sm mb-8">Servicii</h2>
             <ul className="space-y-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">
               <li><Link href="/tractari-auto-sibiu" className="hover:text-primary transition-colors">Tractări auto Sibiu</Link></li>
               <li><Link href="/asistenta-rutiera-sibiu" className="hover:text-primary transition-colors">Asistență rutieră Sibiu</Link></li>
@@ -47,7 +47,7 @@ export default function Footer() {
 
           {/* Column 3 - Navigation */}
           <nav aria-label="Navigare footer">
-            <h4 className="font-black text-white uppercase tracking-widest text-sm mb-8">Navigare Rapidă</h4>
+            <h2 className="font-black text-white uppercase tracking-widest text-sm mb-8">Navigare Rapidă</h2>
             <ul className="space-y-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">
               <li><Link href="/" className="hover:text-primary transition-colors">Acasă</Link></li>
               <li><Link href="/#servicii" className="hover:text-primary transition-colors">Servicii</Link></li>
@@ -60,7 +60,7 @@ export default function Footer() {
 
           {/* Column 3 - Legal */}
           <div>
-            <h4 className="font-black text-white uppercase tracking-widest text-sm mb-8">Informații Legale</h4>
+            <h2 className="font-black text-white uppercase tracking-widest text-sm mb-8">Informații Legale</h2>
             <ul className="space-y-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">
               <li><Link href="/politica-de-confidentialitate" className="hover:text-primary transition-colors">Politică de Confidențialitate</Link></li>
               <li><Link href="/termeni-si-conditii" className="hover:text-primary transition-colors">Termeni și Condiții</Link></li>
@@ -90,7 +90,7 @@ export default function Footer() {
                 href="https://www.diacovidiu.ro"
                 target="_blank"
                 rel="noopener"
-                className="text-muted-foreground/80 underline-offset-4 hover:text-primary hover:underline transition-colors"
+                className="text-muted-foreground underline underline-offset-4 hover:text-primary transition-colors"
               >
                 Diac Ovidiu
               </a>

@@ -3,11 +3,13 @@ import { notFound } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
-import { blogPosts } from '@/lib/blog-data';
+import { blogPosts, formatPostDate, postReadMinutes, postWordCount } from '@/lib/blog-data';
 import { Button } from '@/components/ui/button';
 import { Phone, Calendar, Clock, ArrowLeft, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-import { BUSINESS_ID, JsonLd, PHONE_DISPLAY, PHONE_HREF, WHATSAPP_URL, absoluteUrl, breadcrumbJsonLd, pageMetadata } from '@/lib/site';
+import {
+  BUSINESS_ID, JsonLd, PHONE_DISPLAY, PHONE_HREF, SITE_NAME, WEBSITE_ID, WHATSAPP_URL, absoluteUrl, breadcrumbJsonLd, ogImageUrl, pageMetadata,
+} from '@/lib/site';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -32,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       openGraphType: 'article',
       publishedTime: post.date,
+      modifiedTime: post.updated,
     }),
     keywords: post.keywords,
   };
@@ -51,11 +54,23 @@ export default async function BlogPostPage({ params }: Props) {
     "headline": post.title,
     "description": post.excerpt,
     "datePublished": post.date,
+    "dateModified": post.updated ?? post.date,
+    "image": ogImageUrl(`/blog/${slug}`),
+    "wordCount": postWordCount(post),
+    "keywords": post.keywords.join(', '),
+    "isPartOf": { "@id": WEBSITE_ID },
     "inLanguage": "ro-RO",
     "mainEntityOfPage": url,
     "author": { "@id": BUSINESS_ID },
     "publisher": { "@id": BUSINESS_ID },
   };
+
+  // The CTA goes before the section heading closest to the middle of the article.
+  const headingIndexes = post.content.flatMap((block, i) => (typeof block !== 'string' && 'h2' in block ? [i] : []));
+  const middle = post.content.length / 2;
+  const ctaIndex = headingIndexes.length
+    ? headingIndexes.reduce((best, i) => (Math.abs(i - middle) < Math.abs(best - middle) ? i : best))
+    : -1;
 
   return (
     <main className="min-h-screen">
@@ -74,16 +89,21 @@ export default async function BlogPostPage({ params }: Props) {
             <ArrowLeft className="w-4 h-4" /> Înapoi la Blog
           </Link>
           
-          <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6 font-black uppercase tracking-widest">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground mb-6 font-black uppercase tracking-widest">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-primary" />
-              {post.date}
+              <Calendar className="w-4 h-4 text-primary" aria-hidden="true" />
+              <time dateTime={post.date}>{formatPostDate(post.date)}</time>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-primary" />
-              {post.readTime}
+              <Clock className="w-4 h-4 text-primary" aria-hidden="true" />
+              {postReadMinutes(post)} min de citit
             </div>
           </div>
+          {post.updated && post.updated !== post.date && (
+            <p className="text-sm text-muted-foreground mb-6">
+              Actualizat la <time dateTime={post.updated}>{formatPostDate(post.updated)}</time> · {SITE_NAME}
+            </p>
+          )}
           
           <h1 className="text-4xl md:text-6xl font-black font-headline mb-8 uppercase tracking-tighter leading-tight">
             {post.title}
@@ -93,26 +113,39 @@ export default async function BlogPostPage({ params }: Props) {
 
       <section className="py-20 bg-background">
         <div className="max-w-4xl mx-auto px-4">
+          <p className="mb-12 rounded-3xl border border-primary/30 bg-secondary/20 p-8 text-xl font-medium leading-relaxed text-white">
+            <strong className="text-primary">Pe scurt:</strong> {post.summary}
+          </p>
+
           <div className="prose prose-invert prose-orange max-w-none">
-            {post.content.map((paragraph, index) => (
+            {post.content.map((block, index) => (
               <div key={index}>
-                <p className="text-xl leading-relaxed text-muted-foreground mb-8">
-                  {paragraph}
-                </p>
-                
-                {/* Mid-article CTA */}
-                {index === Math.floor(post.content.length / 2) && (
+                {/* Mid-article CTA, placed before a section heading so it never splits a section */}
+                {index === ctaIndex && (
                   <div className="my-16 p-10 rounded-[2.5rem] bg-secondary/20 border border-primary/30 text-center relative overflow-hidden group">
                     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <h3 className="text-2xl font-black uppercase tracking-tight mb-4 relative z-10">Ai nevoie de ajutor acum?</h3>
+                    <p className="text-2xl font-black uppercase tracking-tight mb-4 relative z-10">Ai nevoie de ajutor acum?</p>
                     <p className="text-muted-foreground mb-8 font-medium relative z-10">Preluăm apeluri non-stop pentru Sibiu, împrejurimi și A1. Prețul și timpul estimat vi le spunem la telefon.</p>
                     <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black h-auto min-h-14 py-3 whitespace-normal max-w-full px-6 sm:px-10 rounded-xl text-lg relative z-10" asChild>
                       <a href={PHONE_HREF} data-cta="article-mid">
-                        <Phone className="w-5 h-5 mr-3" />
+                        <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
                         {PHONE_DISPLAY}
                       </a>
                     </Button>
                   </div>
+                )}
+                {typeof block === 'string' ? (
+                  <p className="text-xl leading-relaxed text-muted-foreground mb-8">{block}</p>
+                ) : 'h2' in block ? (
+                  <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mt-14 mb-6">{block.h2}</h2>
+                ) : block.ordered ? (
+                  <ol className="list-decimal pl-6 space-y-3 text-xl leading-relaxed text-muted-foreground mb-8">
+                    {block.list.map((item) => <li key={item}>{item}</li>)}
+                  </ol>
+                ) : (
+                  <ul className="list-disc pl-6 space-y-3 text-xl leading-relaxed text-muted-foreground mb-8">
+                    {block.list.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
                 )}
               </div>
             ))}

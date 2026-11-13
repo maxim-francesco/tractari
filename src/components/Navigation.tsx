@@ -23,9 +23,9 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border" aria-label="Navigare principală">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group" aria-label="RDL Tractări Auto Sibiu - Pagina principală">
+        <Link href="/" className="flex items-center gap-2 group">
           <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-300">
-            <span className="text-white font-bold text-xl">T</span>
+            <span className="text-white font-bold text-xl" aria-hidden="true">T</span>
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-primary font-bold tracking-tight text-lg uppercase">RDL TRACTĂRI</span>
@@ -49,7 +49,7 @@ export default function Navigation() {
             </Link>
           ))}
           <Button variant="default" className="bg-primary hover:bg-primary/90 rounded-full font-bold h-11 px-6 shadow-lg shadow-primary/20" asChild>
-            <a href={PHONE_HREF} data-cta="nav-desktop" aria-label={`Sună la ${PHONE_DISPLAY}`}>
+            <a href={PHONE_HREF} data-cta="nav-desktop">
               <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
               {PHONE_DISPLAY}
             </a>

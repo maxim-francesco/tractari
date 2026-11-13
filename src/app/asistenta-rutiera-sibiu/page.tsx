@@ -5,7 +5,8 @@ import StickyCTA from '@/components/StickyCTA';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, Clock, Check } from 'lucide-react';
 import Link from 'next/link';
-import { JsonLd, PHONE_DISPLAY, PHONE_HREF, breadcrumbJsonLd, pageMetadata, serviceJsonLd } from '@/lib/site';
+import FaqList from '@/components/FaqList';
+import { JsonLd, PHONE_DISPLAY, PHONE_HREF, breadcrumbJsonLd, faqJsonLd, pageMetadata, serviceJsonLd } from '@/lib/site';
 
 const PATH = '/asistenta-rutiera-sibiu';
 
@@ -15,12 +16,40 @@ export const metadata: Metadata = pageMetadata({
   description: `Asistență rutieră în Sibiu și pe A1, non-stop: tractare, baterie descărcată, pană de cauciuc, alimentare greșită. Sunați și aflați soluția și prețul.`,
 });
 
+const faqItems = [
+  {
+    q: 'Ce înseamnă asistență rutieră?',
+    a: 'Ajutorul pe care îl primiți când mașina nu mai poate continua drumul: tractare pe platformă, ajutor la o baterie descărcată sau la o pană de cauciuc și transportul mașinii la service. La telefon vă spunem ce soluție se potrivește situației dumneavoastră.',
+  },
+  {
+    q: 'Cât costă asistența rutieră în Sibiu?',
+    a: 'Prețul depinde de ce este de făcut, de distanță și de vehicul. Vi-l spunem la telefon, înainte să plecăm spre dumneavoastră.',
+  },
+  {
+    q: 'Interveniți și noaptea sau în weekend?',
+    a: 'Da, preluăm apeluri non-stop, inclusiv noaptea, în weekend și de sărbători.',
+  },
+  {
+    q: 'Unde oferiți asistență rutieră?',
+    a: 'În municipiul Sibiu și în localitățile din județ, pe Autostrada A1 în zona Sibiu și pe Valea Oltului (DN7), până la Râmnicu Vâlcea. Pentru alte localități, sunați și vă spunem dacă putem ajunge.',
+  },
+  {
+    q: 'Ce fac după un accident ușor, fără răniți?',
+    a: 'Porniți avariile și, dacă mașinile pot fi mutate, scoateți-le din trafic. Dacă sunt persoane rănite, sunați la 112. Pentru o mașină care nu mai poate circula, sunați-ne și o ducem pe platformă la service sau la adresa indicată.',
+  },
+  {
+    q: 'Ce vehicule preluați?',
+    a: 'Doar autoturisme și dube. Camioane, autocare sau utilaje nu tractăm.',
+  },
+];
+
 export default function AsistentaRutieraPage() {
 
   return (
     <main className="min-h-screen">
       <Navigation />
       <JsonLd data={serviceJsonLd({ path: PATH, name: 'Asistență rutieră Sibiu', description: metadata.description as string, serviceType: 'Asistență rutieră' })} />
+      <JsonLd data={faqJsonLd(faqItems)} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Asistență Rutieră Sibiu', path: PATH }])} />
       
       <section className="pt-32 pb-16 bg-gradient-to-b from-secondary/20 to-background">
@@ -89,6 +118,21 @@ export default function AsistentaRutieraPage() {
             <p className="mt-5">
               Ați alimentat greșit? Vedeți și <Link href="/blog/alimentare-gresita-ce-sa-faci" className="text-primary font-bold">ce faceți după o alimentare greșită</Link>.
             </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-20 text-muted-foreground text-lg leading-relaxed">
+            <h2 className="text-3xl font-bold mb-5 text-white uppercase font-headline">Asistență rutieră pe A1 și pe Valea Oltului</h2>
+            <p>
+              Pe Autostrada A1 și pe DN7 (Valea Oltului), intervențiile lungi pe marginea drumului sunt riscante. De aceea, de cele mai multe ori mașina este încărcată
+              pe platformă și dusă într-un loc sigur sau direct la service. Când sunați, spuneți-ne sensul de mers și cel mai apropiat reper: bornă kilometrică, ieșire,
+              nod rutier sau localitate. Pașii de siguranță sunt descriși în articolul{' '}
+              <Link href="/blog/ce-faci-cand-ramai-in-pana-pe-autostrada" className="text-primary font-bold underline underline-offset-4">ce faceți când rămâneți în pană pe A1</Link>.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-20">
+            <h2 className="text-3xl font-bold mb-8 text-white uppercase font-headline text-center">Întrebări despre asistența rutieră</h2>
+            <FaqList items={faqItems} />
           </div>
 
           <div className="pt-10 border-t border-border flex flex-col md:flex-row justify-center items-center gap-8">

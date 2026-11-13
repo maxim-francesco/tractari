@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import StickyCTA from '@/components/StickyCTA';
 import FaqList from '@/components/FaqList';
 import { MapPin, Shield, HelpCircle, Truck } from 'lucide-react';
-import { AREA_SERVED, JsonLd, PHONE_DISPLAY, faqJsonLd, pageMetadata } from '@/lib/site';
+import { AREA_SERVED, CUI, JsonLd, LEGAL_NAME, PHONE_DISPLAY, faqJsonLd, pageMetadata } from '@/lib/site';
 
 export const metadata: Metadata = pageMetadata({
   path: '/',
@@ -120,7 +120,7 @@ export default function Home() {
                   <span className="text-primary">Cum Lucrăm</span>
                 </h2>
                 <p className="text-white/90 text-xl leading-relaxed mb-8 font-medium">
-                  Cu dedicare și profesionalism, echipa noastră din Sibiu este ajutorul pe care te poți baza oricând ai o problemă cu vehiculul tău, indiferent de oră sau locație.
+                  RDL Tractări Auto Sibiu este un serviciu de tractări pe platformă din județul Sibiu, operat de {LEGAL_NAME} (CUI {CUI}). Tractăm autoturisme și dube în Sibiu, în localitățile din județ, pe Autostrada A1 în zona Sibiu și pe Valea Oltului, iar apelurile sunt preluate non-stop.
                 </p>
                 
                 <div className="space-y-6 mb-12">

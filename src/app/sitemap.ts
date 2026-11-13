@@ -3,7 +3,8 @@ import { blogPosts } from '@/lib/blog-data'
 import { absoluteUrl } from '@/lib/site'
 
 // Only final, indexable, self-canonical URLs. Noindex legal pages are left out.
-// No lastmod: there is no reliable modification date (build time is not one).
+// lastmod only for articles, which carry a real content date; the other pages have no
+// reliable modification date (build time is not one).
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '/',
@@ -14,8 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/intrebari-frecvente',
     '/contact',
     '/blog',
-    ...blogPosts.map((post) => `/blog/${post.slug}`),
   ]
 
-  return routes.map((route) => ({ url: absoluteUrl(route) }))
+  return [
+    ...routes.map((route) => ({ url: absoluteUrl(route) })),
+    ...blogPosts.map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      lastModified: post.updated ?? post.date,
+    })),
+  ]
 }
