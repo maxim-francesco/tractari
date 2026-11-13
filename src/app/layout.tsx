@@ -21,7 +21,9 @@ const AI_REFERRERS = [
 ].map((host) => host.replace(/\./g, '\\.')).join('|');
 
 const inter = Inter({
-  subsets: ['latin'],
+  // latin-ext carries ă, â, î, ș, ț: without it the Romanian text is repainted when the
+  // second font file arrives, which delays the largest paint.
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
   variable: '--font-inter',
 });
@@ -106,6 +108,8 @@ const siteGraph = {
       '@type': 'AutomotiveBusiness',
       '@id': BUSINESS_ID,
       name: SITE_NAME,
+      // The name people see in the domain; helps tie the brand to the site as one entity.
+      alternateName: ['Tractări Mașini Sibiu', 'RDL Tractări'],
       legalName: LEGAL_NAME,
       taxID: CUI,
       description: 'Tractări auto pe platformă și asistență rutieră pentru autoturisme și dube în Sibiu, în județul Sibiu, pe Autostrada A1 în zona Sibiu și pe Valea Oltului (DN7). Apeluri preluate non-stop.',
@@ -154,6 +158,7 @@ const siteGraph = {
       '@id': WEBSITE_ID,
       url: absoluteUrl('/'),
       name: SITE_NAME,
+      alternateName: 'Tractări Mașini Sibiu',
       inLanguage: 'ro-RO',
       publisher: { '@id': BUSINESS_ID },
     },

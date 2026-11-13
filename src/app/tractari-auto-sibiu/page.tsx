@@ -74,7 +74,7 @@ export default function TractariAutoPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <div className="prose prose-invert prose-orange max-w-none">
-              <h2 className="text-3xl font-bold mb-6 text-white uppercase font-headline">Tractare Sibiu: cum decurge</h2>
+              <h2 className="text-3xl font-bold mb-6 text-white uppercase font-headline">Tractare auto Sibiu: cum decurge</h2>
               <ol className="space-y-4 text-muted-foreground list-decimal pl-5">
                 <li>Sunați la <strong>{PHONE_DISPLAY}</strong> și spuneți-ne locația, destinația și ce vehicul aveți.</li>
                 <li>Vă spunem prețul și timpul estimat de sosire. Platforma pleacă după ce sunteți de acord.</li>
